@@ -22,7 +22,10 @@ public class Mobil {
         cardPanel.add(new Register(), "Register");
         cardPanel.add(new Product(), "Product");
         cardPanel.add(new Sell(), "Sell");
-        //cardPanel.add(new UserMenue(), "UserMenue");
+        cardPanel.add(new Liste(), "Liste");
+        cardPanel.add(new Kunden(), "Kunden");
+        cardPanel.add(new ShowKunde(), "ShowKunde");
+        cardPanel.add(new show(), "show");
         JFrame frame = new JFrame("CardLayout-Demo");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(cardPanel, BorderLayout.CENTER);
