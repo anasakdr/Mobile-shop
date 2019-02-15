@@ -39,20 +39,17 @@
                           <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jTextField6" min="-2" pref="71" max="-2" attributes="0"/>
+                                      <Component id="vkFeld" min="-2" pref="71" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                      <Component id="jTextField5" min="-2" pref="67" max="-2" attributes="0"/>
+                                      <Component id="ekFeld" min="-2" pref="67" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField1" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
-                                  <Component id="jTextField4" alignment="1" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="bFeld" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="nameFeld" alignment="0" min="-2" pref="252" max="-2" attributes="0"/>
+                                  <Component id="qFeld" alignment="1" min="-2" pref="67" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField7" min="-2" pref="115" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jTextField7" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -118,22 +115,22 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                      <Component id="nameFeld" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bFeld" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="qFeld" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="ekFeld" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="vkFeld" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -193,13 +190,13 @@
         <Property name="text" type="java.lang.String" value="&#x627;&#x644;&#x645;&#x644;&#x627;&#x62d;&#x638;&#x627;&#x62a;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="nameFeld">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="bFeld">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField3">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
+    <Component class="javax.swing.JTextField" name="qFeld">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -223,9 +220,9 @@
         <Property name="text" type="java.lang.String" value="&#x633;&#x639;&#x631; &#x627;&#x644;&#x628;&#x64a;&#x639;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField5">
+    <Component class="javax.swing.JTextField" name="ekFeld">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField6">
+    <Component class="javax.swing.JTextField" name="vkFeld">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -263,6 +260,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#x623;&#x636;&#x627;&#x641;&#x629;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>

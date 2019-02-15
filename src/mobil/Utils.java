@@ -17,7 +17,7 @@ public class Utils {
     public static Connection getConnection() {
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/mobile?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/mobile?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8", "root", "");
         } catch (SQLException ex) {
             Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
