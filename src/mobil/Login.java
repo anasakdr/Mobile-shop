@@ -71,6 +71,8 @@ public class Login extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(204, 255, 255));
         jLabel2.setText("الرقم السري");
 
+        nameFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mobil/Download.jpg"))); // NOI18N
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mobil/Download (1).jpg"))); // NOI18N
@@ -92,6 +94,8 @@ public class Login extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        passFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 153, 153));
@@ -181,6 +185,8 @@ public class Login extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       Mobil.cl.show(Mobil.cardPanel, "Register");
+      nameFeld.setText("");
+      passFeld.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

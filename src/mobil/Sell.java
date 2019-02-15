@@ -53,13 +53,19 @@ public class Sell extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(204, 255, 255));
         jLabel2.setText("الزبون");
 
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 255, 255));
         jLabel3.setText("الفاتورة");
 
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 255, 255));
         jLabel4.setText("اجمالي الفاتورة");
+
+        jTextField3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Product extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         nameFeld = new javax.swing.JTextField();
         bFeld = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        noteFeld = new javax.swing.JTextField();
         qFeld = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -72,6 +73,14 @@ public class Product extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(204, 255, 255));
         jLabel5.setText("الملاحظات");
 
+        nameFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        bFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        noteFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        qFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 255, 255));
         jLabel1.setText("سعر الشراء");
@@ -80,6 +89,10 @@ public class Product extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(204, 255, 255));
         jLabel6.setText("سعر البيع");
 
+        ekFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        vkFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 255, 255));
         jLabel7.setText("صافي ربح القطعة");
@@ -87,6 +100,10 @@ public class Product extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(204, 255, 255));
         jLabel8.setText("صافي الربح الاجمالي");
+
+        jTextField7.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 51, 51));
@@ -125,7 +142,7 @@ public class Product extends javax.swing.JPanel {
                         .addContainerGap(160, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(noteFeld, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -176,7 +193,7 @@ public class Product extends javax.swing.JPanel {
                         .addGap(252, 252, 252)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(noteFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -211,7 +228,6 @@ public class Product extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        Mobil.cl.show(Mobil.cardPanel, "Liste");
-       zeig();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -219,8 +235,9 @@ public class Product extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            String ss="INSERT INTO `ware`( `Name`, `Beschreibung`, `quantitaet`, `Kaufpreis`, `Verkaufprise`) VALUES (?,?,?,?,?)";
+         if (!Utils.isEmpty(nameFeld.getText(),bFeld.getText(),qFeld.getText(),ekFeld.getText(),vkFeld.getText(),noteFeld.getText())){
+             try {
+            String ss="INSERT INTO ware( Name, Beschreibung`, quantitaet, Kaufpreis, Verkaufprise,noteFeld) VALUES (?,?,?,?,?,?)";
             PreparedStatement ps;
             ps=Utils.getConnection().prepareStatement(ss);
             ps.setString(1,nameFeld.getText());
@@ -231,30 +248,14 @@ public class Product extends javax.swing.JPanel {
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }}
+         else{
+             JOptionPane.showMessageDialog(null,"احد الحقول فارغ يرجى التعبئة");
+         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
-public void zeig(){
-    
-   PreparedStatement statement;
-    ResultSet rs;
-        try {
-            statement = Utils.getConnection().prepareStatement(
-                    "SELECT Name,Beschreibung FROM ware WHERE ID=3 ");
-       
-       
-        rs = statement.executeQuery();
-        while(rs.next()){
-           System.out.println("UserName:"+rs.getString("Name")+"Password:"+rs.getString("Beschreibung"));
-       }  } catch (SQLException ex) {
-            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
- //handle exceptions
-finally{
- //close statements, statement and resultset here..
-}
-}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bFeld;
@@ -270,10 +271,10 @@ finally{
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField nameFeld;
+    private javax.swing.JTextField noteFeld;
     private javax.swing.JTextField qFeld;
     private javax.swing.JTextField vkFeld;
     // End of variables declaration//GEN-END:variables

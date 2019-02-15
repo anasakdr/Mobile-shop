@@ -149,8 +149,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nameFeld">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="mailFeld">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -181,8 +187,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passFeld">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="rePassFeld">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>

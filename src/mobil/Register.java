@@ -67,6 +67,10 @@ public class Register extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(204, 255, 255));
         jLabel4.setText("تأكيد رقم السر");
 
+        nameFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        mailFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 51, 51));
         jButton1.setText("تسجيل");
@@ -84,6 +88,10 @@ public class Register extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        passFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        rePassFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 153, 153));
@@ -189,7 +197,10 @@ public class Register extends javax.swing.JPanel {
             ps.setString(2, mailFeld.getText());
             ps.setString(3, Utils.sha256(pass));
             ps.executeUpdate();
-                
+             nameFeld.setText("");
+             mailFeld.setText("");
+             passFeld.setText("");
+             rePassFeld.setText("");
               JOptionPane.showMessageDialog(null, "Registrierung erfolgreich");
               Mobil.cl.show(Mobil.cardPanel, "Login");
         } catch (SQLException ex) {

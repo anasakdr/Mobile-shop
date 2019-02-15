@@ -39,6 +39,8 @@ public class ShowKunde extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(24, 40, 108));
 
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 255, 255));
         jLabel1.setText("اسم الزبون");

@@ -48,11 +48,18 @@ public class Kunden extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(24, 40, 108));
 
+        nameFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        commitFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         commitFeld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 commitFeldActionPerformed(evt);
             }
         });
+
+        adresseFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        telefonFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 204));
@@ -194,6 +201,10 @@ public class Kunden extends javax.swing.JPanel {
             ps.setString(1, adresseFeld.getText());
             ps.setString(1, telefonFeld.getText());
             ps.executeUpdate();
+            nameFeld.setText("");
+            adresseFeld.setText("");
+            telefonFeld.setText("");
+            commitFeld.setText("");
         } catch (SQLException ex) {
             Logger.getLogger(Kunden.class.getName()).log(Level.SEVERE, null, ex);
         }
