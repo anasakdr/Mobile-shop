@@ -197,9 +197,9 @@ public class Kunden extends javax.swing.JPanel {
           
             String s="INSERT INTO kunde(Name,Adresse,telefon)VALUES(?,?,?)";
             ps = Utils.getConnection().prepareStatement(s);
-            ps.setString(1, nameFeld.getText());
-            ps.setString(1, adresseFeld.getText());
-            ps.setString(1, telefonFeld.getText());
+            ps.setString(1, name);
+            ps.setString(2, adresse);
+            ps.setString(3, telefon);
             ps.executeUpdate();
             nameFeld.setText("");
             adresseFeld.setText("");

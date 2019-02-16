@@ -5,12 +5,22 @@
  */
 package mobil;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Anas
  */
 public class ShowKunde extends javax.swing.JPanel {
-
+   PreparedStatement ps;
+    ResultSet st;
+    DefaultTableModel model;
+            int rowCount;
     /**
      * Creates new form ShowKunde
      */
@@ -27,19 +37,25 @@ public class ShowKunde extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        suchKunde = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        kundeTabele = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(24, 40, 108));
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        suchKunde.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        suchKunde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                suchKundeKeyReleased(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 255, 255));
@@ -48,7 +64,7 @@ public class ShowKunde extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("البحث");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        kundeTabele.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -56,7 +72,7 @@ public class ShowKunde extends javax.swing.JPanel {
                 "الهاتف", "العنوان", "اسم الزبون"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(kundeTabele);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 51, 51));
@@ -79,15 +95,22 @@ public class ShowKunde extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 153, 153));
         jLabel9.setText("X");
 
+        jButton1.setText("عرض الكل");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(430, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(suchKunde, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -98,18 +121,18 @@ public class ShowKunde extends javax.swing.JPanel {
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18))))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addGap(118, 118, 118)
-                .addComponent(jButton2)
-                .addGap(226, 226, 226))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(299, 299, 299)
-                .addComponent(jButton3)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                .addGap(70, 70, 70)
+                .addComponent(jButton1)
+                .addGap(184, 184, 184))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,14 +144,15 @@ public class ShowKunde extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                    .addComponent(suchKunde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addGap(92, 92, 92)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton4))
-                .addGap(37, 37, 37)
+                    .addComponent(jButton4)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addGap(41, 41, 41))
         );
@@ -138,8 +162,54 @@ public class ShowKunde extends javax.swing.JPanel {
         Mobil.cl.show(Mobil.cardPanel, "Liste");
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void suchKundeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suchKundeKeyReleased
+       model = (DefaultTableModel) kundeTabele.getModel();
+        rowCount = model.getRowCount();
+        //Löcht alle zeile von unsere Tabelle
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        try {
+            String query = "SELECT * FROM kunde WHERE Name=?";
+        
+            ps = Utils.getConnection().prepareStatement(query);
+            ps.setString(1, suchKunde.getText());
+            st = ps.executeQuery();
+            while (st.next()) {
+               // if (passwortListe.getSelectedIndex() == rs.getInt(5) || passwortListe.getSelectedIndex() == 2) {
+                    model.addRow(new Object[]{ st.getString("Telefon"), st.getString("Adresse"), st.getString("Name")});
+               // }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_suchKundeKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        model = (DefaultTableModel) kundeTabele.getModel();
+        rowCount = model.getRowCount();
+        //Löcht alle zeile von unsere Tabelle
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        try {
+            String query = "SELECT * FROM kunde ";
+        
+            ps = Utils.getConnection().prepareStatement(query);
+            st = ps.executeQuery();
+            while (st.next()) {
+               // if (passwortListe.getSelectedIndex() == rs.getInt(5) || passwortListe.getSelectedIndex() == 2) {
+                    model.addRow(new Object[]{ st.getString("Telefon"), st.getString("Adresse"), st.getString("Name")});
+               // }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -147,7 +217,7 @@ public class ShowKunde extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable kundeTabele;
+    private javax.swing.JTextField suchKunde;
     // End of variables declaration//GEN-END:variables
 }
