@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -106,6 +107,16 @@ public class show extends javax.swing.JPanel {
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 51, 51));
         jButton4.setText("الحذف");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 153, 153));
@@ -270,6 +281,41 @@ public class show extends javax.swing.JPanel {
             Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_suchNummerKeyReleased
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        int index =wareTabele.getSelectedRow();
+        model=(DefaultTableModel) wareTabele.getModel();
+        int v1=Integer.parseInt(model.getValueAt(index, 0).toString());
+        int v2=Integer.parseInt(model.getValueAt(index, 1).toString());
+        int v3=Integer.parseInt(model.getValueAt(index, 2).toString());
+        int v4=Integer.parseInt(model.getValueAt(index, 3).toString());
+            
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int i =wareTabele.getSelectedRow();
+     model=(DefaultTableModel) wareTabele.getModel();
+     String sss=model.getValueAt(i, 5).toString();
+        int ii = JOptionPane.showConfirmDialog(null, "Sind Sie sicher?", "Sicherheit Frage", JOptionPane.OK_CANCEL_OPTION);
+        if (ii == JOptionPane.OK_OPTION) {
+           
+                try {
+                    ps = Utils.getConnection().prepareStatement("DELETE FROM ware WHERE Name=?");
+                    
+                    
+                    ps.setString(1, sss);
+                    ps.executeUpdate();
+                 //   Show_Product_In_JTable();                                   
+                } catch (SQLException ex) {
+                    Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+                    //Zeig mir Massege
+                    JOptionPane.showMessageDialog(null, "Ware ist nicht gelöscht");
+                
+                 } 
+            }else if (ii == JOptionPane.CANCEL_OPTION) {
+                JOptionPane.showMessageDialog(null, "alles klar", "Sicherheit Frage", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

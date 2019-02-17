@@ -159,9 +159,9 @@ public class Product extends javax.swing.JPanel {
         });
 
         jButton3.setText(" ربح القطعة والاجمالي");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
             }
         });
 
@@ -287,9 +287,7 @@ public class Product extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
         }}
-         else{
-             JOptionPane.showMessageDialog(null,"احد الحقول فارغ يرجى التعبئة");
-         }
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -298,18 +296,7 @@ public class Product extends javax.swing.JPanel {
      
      
     }//GEN-LAST:event_sumFeldAncestorAdded
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       Integer result = Integer.valueOf(ekFeld.getText());
-     Integer result1 = Integer.valueOf(vkFeld.getText());
-     Integer result2 = Integer.valueOf(qFeld.getText());;
-   
-     int sum=(result1-result)*result2;
-     if (!Utils.isEmpty(vkFeld.getText()))
-    {
-        sumFeld.setText(Integer.toString(sum));
-    }//GEN-LAST:event_jButton3ActionPerformed
-    }
+  
     private void qFeldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qFeldKeyTyped
        char c=evt.getKeyChar();
        if(!(Character.isDigit(c)|| (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE)){getToolkit().beep();evt.consume();}
@@ -324,6 +311,23 @@ public class Product extends javax.swing.JPanel {
         char c=evt.getKeyChar();
        if(!(Character.isDigit(c)|| (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE)){getToolkit().beep();evt.consume();}
     }//GEN-LAST:event_vkFeldKeyTyped
+
+  
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        String  result = ekFeld.getText();
+        String result1 = vkFeld.getText();
+        String result2 = qFeld.getText();;
+   
+     //int sum=(result1-result)*result2;
+     if (!Utils.isEmpty(ekFeld.getText(),vkFeld.getText(),qFeld.getText()))
+    { JOptionPane.showMessageDialog(null,"okay");
+     //   sumFeld.setText(Integer.toString(sum));
+    } else{
+        JOptionPane.showMessageDialog(null,"asdad");
+         
+         return;
+     }
+    }//GEN-LAST:event_jButton3MouseClicked
 
     
 
