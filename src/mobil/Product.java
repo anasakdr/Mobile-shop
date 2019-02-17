@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
  * @author Anas
  */
 public class Product extends javax.swing.JPanel {
-
+ PreparedStatement ps = null;
+        ResultSet rs = null;
     /**
      * Creates new form Product
      */
@@ -273,9 +274,28 @@ public class Product extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         if (!Utils.isEmpty(nameFeld.getText(),bFeld.getText(),qFeld.getText(),ekFeld.getText(),vkFeld.getText(),noteFeld.getText())){
-             try {
-            String ss="INSERT INTO ware( Name, Beschreibung`, quantitaet, Kaufpreis, Verkaufprise,noteFeld) VALUES (?,?,?,?,?,?)";
+       int vk= Integer.valueOf(vkFeld.getText());
+       int ek= Integer.valueOf(ekFeld.getText());
+        String ver = "SELECT Name FROM ware WHERE Name =?";  
+        if (Utils.isEmpty(nameFeld.getText(),bFeld.getText(),qFeld.getText(),ekFeld.getText(),vkFeld.getText())) {
+            JOptionPane.showMessageDialog(null, "بعض الجداول فارغة");
+            return;}
+        else {
+        
+            try {
+                ps = Utils.getConnection().prepareStatement(ver);
+                ps.setString(1, nameFeld.getText());
+                rs = ps.executeQuery();
+                
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "هذه المادة موجوة من قبل");
+                    return;
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            try {
+            String ss="INSERT INTO ware( Name, Beschreibung, quantitaet, Kaufpreis, Verkaufprise) VALUES (?,?,?,?,?)";
             PreparedStatement ps;
             ps=Utils.getConnection().prepareStatement(ss);
             ps.setString(1,nameFeld.getText());
@@ -283,7 +303,16 @@ public class Product extends javax.swing.JPanel {
             ps.setString(3, qFeld.getText());
             ps.setString(4, ekFeld.getText());
             ps.setString(5, vkFeld.getText());
+            if(ek>vk){JOptionPane.showMessageDialog(null,"سعر الشراء اكبر من سعر البيع");
+            return;}
             ps.executeUpdate();
+            nameFeld.setText("");
+            bFeld.setText("");
+            qFeld.setText("");
+            ekFeld.setText("");
+            vkFeld.setText("");
+            noteFeld.setText("");
+            
         } catch (SQLException ex) {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
         }}

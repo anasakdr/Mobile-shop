@@ -5,11 +5,13 @@
  */
 package mobil;
 
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,6 +23,7 @@ public class Sell extends javax.swing.JPanel {
      public static ResultSet rs=null;
      public static PreparedStatement ps;
      DefaultTableModel model;
+      int rowCount;
     /**
      * Creates new form Sell
      */
@@ -38,7 +41,6 @@ public class Sell extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -51,13 +53,14 @@ public class Sell extends javax.swing.JPanel {
         sum = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         wareBox = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        löschen = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        insterWare = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         quanFeld = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        kundenBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(24, 40, 108));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "المعتمد: المبيعات", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(255, 204, 204))); // NOI18N
@@ -65,8 +68,6 @@ public class Sell extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 255, 255));
         jLabel2.setText("الزبون");
-
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 255, 255));
@@ -140,26 +141,37 @@ public class Sell extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("حذف");
+        löschen.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        löschen.setForeground(new java.awt.Color(255, 51, 51));
+        löschen.setText("حذف");
+        löschen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                löschenActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 51, 51));
         jButton2.setText("انشاء فاتورة");
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 51, 51));
-        jButton4.setText("اضافة");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        insterWare.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        insterWare.setForeground(new java.awt.Color(255, 51, 51));
+        insterWare.setText("اضافة");
+        insterWare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                insterWareActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("0.0");
+
+        quanFeld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                quanFeldKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 153, 102));
@@ -168,6 +180,16 @@ public class Sell extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 153, 102));
         jLabel10.setText("الكمية");
+
+        kundenBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                kundenBoxPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -194,13 +216,13 @@ public class Sell extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
+                    .addComponent(insterWare)
                     .addComponent(jLabel7))
                 .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(kundenBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -219,7 +241,7 @@ public class Sell extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(118, 118, 118)
-                        .addComponent(jButton1)
+                        .addComponent(löschen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(119, 119, 119))))
@@ -230,8 +252,8 @@ public class Sell extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +274,7 @@ public class Sell extends javax.swing.JPanel {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4)
+                    .addComponent(insterWare)
                     .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,7 +285,7 @@ public class Sell extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton1)
+                    .addComponent(löschen)
                     .addComponent(jButton2))
                 .addGap(22, 22, 22))
         );
@@ -278,7 +300,7 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void vkTabeleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vkTabeleMouseClicked
-      
+    
         
     }//GEN-LAST:event_vkTabeleMouseClicked
 
@@ -315,12 +337,55 @@ public class Sell extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_wareBoxPopupMenuWillBecomeInvisible
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void insterWareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insterWareActionPerformed
+    String price;
+    if(!Utils.isEmpty(quanFeld.getText())){
       int s=Integer.parseInt(sum.getText());
       int quan=Integer.parseInt(quanFeld.getText());
       int sum1=s-quan;
       sum.setText(String.valueOf(sum1));
-    }//GEN-LAST:event_jButton4ActionPerformed
+      
+        model = (DefaultTableModel) vkTabele.getModel();
+        rowCount = model.getRowCount();
+        //Löcht alle zeile von unsere Tabelle
+       // for (int i = rowCount - 1; i >= 0; i--) {
+        //    model.removeRow(i);
+     //   }
+      String query="SELECT `Verkaufprise` FROM `ware` WHERE Name=?";
+    try {
+        ps=Utils.getConnection().prepareStatement(query);
+        ps.setString(1, wareBox.getSelectedItem().toString());
+        rs=ps.executeQuery();
+        
+        while(rs.next()){
+            //price=rs.getString("Verkaufprise");
+             model.addRow(new Object[]{(rs.getString(1)),quanFeld.getText(),wareBox.getSelectedItem()});
+             quanFeld.setText("");
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+      }else{
+    JOptionPane.showMessageDialog(null,"الرجاء ادخال الكمية");
+    
+}
+    }//GEN-LAST:event_insterWareActionPerformed
+
+    private void quanFeldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quanFeldKeyTyped
+         char c=evt.getKeyChar();
+       if(!(Character.isDigit(c)|| (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE )){getToolkit().beep();evt.consume();}
+    }//GEN-LAST:event_quanFeldKeyTyped
+
+    private void löschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_löschenActionPerformed
+        model = (DefaultTableModel) vkTabele.getModel();
+        int selectedRow=vkTabele.getSelectedRow();
+        model.removeRow(selectedRow);
+    }//GEN-LAST:event_löschenActionPerformed
+
+    private void kundenBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_kundenBoxPopupMenuWillBecomeInvisible
+       
+    }//GEN-LAST:event_kundenBoxPopupMenuWillBecomeInvisible
 public static void liste(){
            wareBox.removeAllItems();
        try {
@@ -335,12 +400,25 @@ public static void liste(){
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
+public static void liste1(){
+           kundenBox.removeAllItems();
+       try {
+            String ss = "SELECT Name FROM kunde ";
+            ps = Utils.getConnection().prepareStatement(ss);
+            rs=ps.executeQuery(); 
+            while(rs.next()){
+                String name=rs.getString("Name");
+                kundenBox.addItem(name);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton insterWare;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -351,9 +429,10 @@ public static void liste(){
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
+    private static javax.swing.JComboBox<String> kundenBox;
+    private javax.swing.JButton löschen;
     private javax.swing.JTextField quanFeld;
     private javax.swing.JLabel sum;
     private javax.swing.JTable vkTabele;
