@@ -5,6 +5,10 @@
  */
 package mobil;
 
+import java.text.DateFormat;
+import static java.time.Instant.now;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author Anas
@@ -196,7 +200,11 @@ public class Liste extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       Mobil.cl.show(Mobil.cardPanel, "Sell");
+      GregorianCalendar now = new GregorianCalendar();
+        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+        String datum = df.format(now.getTime());
+        Mobil.cl.show(Mobil.cardPanel, "Sell");
+         Sell.datumL.setText(datum);
        Sell.liste();
        Sell.liste1();
     }//GEN-LAST:event_jButton4ActionPerformed

@@ -32,6 +32,7 @@ public class Mobil {
         frame.pack();
         frame.setSize(cardPanel.getWidth(), cardPanel.getHeight());
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 
