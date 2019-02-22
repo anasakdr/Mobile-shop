@@ -9,12 +9,9 @@ import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -57,7 +54,7 @@ public class Sell extends javax.swing.JPanel {
         löschen = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         insterWare = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        summmm = new javax.swing.JLabel();
         quanFeld = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -86,7 +83,7 @@ public class Sell extends javax.swing.JPanel {
 
             },
             new String [] {
-                "السعر", "الكمية", "المادة"
+                "السعر الاجمالي", "السعر للقطعة", "الكمية", "المادة"
             }
         ));
         vkTabele.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,9 +168,9 @@ public class Sell extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("0.0");
+        summmm.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        summmm.setForeground(new java.awt.Color(255, 51, 51));
+        summmm.setText("0.0");
 
         quanFeld.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -212,7 +209,7 @@ public class Sell extends javax.swing.JPanel {
                 .addGap(118, 118, 118)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(summmm)
                         .addGap(27, 27, 27)
                         .addComponent(jLabel4)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -290,8 +287,8 @@ public class Sell extends javax.swing.JPanel {
                     .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -303,7 +300,7 @@ public class Sell extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel1))
+                    .addComponent(summmm))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -361,6 +358,8 @@ public class Sell extends javax.swing.JPanel {
 
     private void insterWareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insterWareActionPerformed
     String price;
+    double totelprise=0;
+    double summe;
     if(!Utils.isEmpty(quanFeld.getText())){
       int s=Integer.parseInt(sum.getText());
       int quan=Integer.parseInt(quanFeld.getText());
@@ -369,19 +368,25 @@ public class Sell extends javax.swing.JPanel {
       
         model = (DefaultTableModel) vkTabele.getModel();
         rowCount = model.getRowCount();
-        //Löcht alle zeile von unsere Tabelle
-       // for (int i = rowCount - 1; i >= 0; i--) {
-        //    model.removeRow(i);
-     //   }
       String query="SELECT `Verkaufprise` FROM `ware` WHERE Name=?";
+      
     try {
         ps=Utils.getConnection().prepareStatement(query);
         ps.setString(1, wareBox.getSelectedItem().toString());
         rs=ps.executeQuery();
         
+        
         while(rs.next()){
-            //price=rs.getString("Verkaufprise");
-             model.addRow(new Object[]{(rs.getString(1)),quanFeld.getText(),wareBox.getSelectedItem()});
+      double l=Double.parseDouble(rs.getString("Verkaufprise"));
+             summe=l*quan;
+             model.addRow(new Object[]{(summe),(rs.getString(1)),quanFeld.getText(),wareBox.getSelectedItem()});
+             for(int i=0;i<model.getRowCount();i++)
+             {
+                  int Amount = Integer.parseInt(model.getValueAt(i, 1)+"");
+                  totelprise=Amount+totelprise;     
+             }
+             summmm.setText(Double.toString(totelprise*quan));
+            
              quanFeld.setText("");
         }
     } catch (SQLException ex) {
@@ -473,7 +478,6 @@ public static void liste1(){
     private javax.swing.JButton insterWare;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -488,6 +492,7 @@ public static void liste1(){
     private javax.swing.JButton löschen;
     private javax.swing.JTextField quanFeld;
     private javax.swing.JLabel sum;
+    private javax.swing.JLabel summmm;
     private javax.swing.JTable vkTabele;
     private static javax.swing.JComboBox<String> wareBox;
     // End of variables declaration//GEN-END:variables
