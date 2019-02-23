@@ -46,6 +46,8 @@ public class Register extends javax.swing.JPanel {
         passFeld = new javax.swing.JPasswordField();
         rePassFeld = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
+        spFeld = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(24, 40, 108));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "المعتمد:  حساب جديد", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(255, 204, 204))); // NOI18N
@@ -102,6 +104,9 @@ public class Register extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel5.setText("كلمة خاصة");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,6 +114,9 @@ public class Register extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(163, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -118,17 +126,16 @@ public class Register extends javax.swing.JPanel {
                             .addComponent(nameFeld, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(mailFeld, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(passFeld, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rePassFeld, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(rePassFeld, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(spFeld, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel1))
-                        .addGap(71, 71, 71))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addContainerGap())))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5))
+                        .addGap(71, 71, 71))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,11 +160,15 @@ public class Register extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(rePassFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(spFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,6 +200,7 @@ public class Register extends javax.swing.JPanel {
                 ex.printStackTrace();
             }
         if(!pass.equals(rePass)){JOptionPane.showMessageDialog(null, "تأكيد كلمة السر لا يتطابق مع كلمة السر");return ;}
+        if(spFeld.getText()!="anas1991"){JOptionPane.showMessageDialog(null, "اطلب كلمة السر من المسوؤل");return;}
         try {
             
             String s="INSERT INTO user(Name,Mail,Passwort)VALUES(?,?,?)";
@@ -222,10 +234,12 @@ public class Register extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField mailFeld;
     private javax.swing.JTextField nameFeld;
     private javax.swing.JPasswordField passFeld;
     private javax.swing.JPasswordField rePassFeld;
+    private javax.swing.JTextField spFeld;
     // End of variables declaration//GEN-END:variables
 }

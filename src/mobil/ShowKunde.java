@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,10 +18,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Anas
  */
 public class ShowKunde extends javax.swing.JPanel {
-   PreparedStatement ps;
-    ResultSet st;
-    DefaultTableModel model;
-            int rowCount;
+   static PreparedStatement ps;
+   static  ResultSet st;
+   static DefaultTableModel model;
+         static   int rowCount;
     /**
      * Creates new form ShowKunde
      */
@@ -46,7 +47,6 @@ public class ShowKunde extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(24, 40, 108));
 
@@ -81,6 +81,11 @@ public class ShowKunde extends javax.swing.JPanel {
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 51, 51));
         jButton4.setText("الحذف");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 51, 51));
@@ -95,18 +100,14 @@ public class ShowKunde extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 153, 153));
         jLabel9.setText("X");
 
-        jButton1.setText("عرض الكل");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
@@ -120,19 +121,14 @@ public class ShowKunde extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18))))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
-                .addGap(70, 70, 70)
-                .addComponent(jButton1)
-                .addGap(184, 184, 184))
+                .addGap(103, 103, 103)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,16 +141,14 @@ public class ShowKunde extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(suchKunde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addGap(41, 41, 41))
+                    .addComponent(jButton3))
+                .addGap(75, 75, 75))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,32 +178,50 @@ public class ShowKunde extends javax.swing.JPanel {
             Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_suchKundeKeyReleased
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        model = (DefaultTableModel) kundeTabele.getModel();
+ public static void showKunde(){
+              model = (DefaultTableModel) kundeTabele.getModel();
         rowCount = model.getRowCount();
         //Löcht alle zeile von unsere Tabelle
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
+        String ss="SELECT * FROM kunde ";
         try {
-            String query = "SELECT * FROM kunde ";
-        
-            ps = Utils.getConnection().prepareStatement(query);
-            st = ps.executeQuery();
-            while (st.next()) {
-               // if (passwortListe.getSelectedIndex() == rs.getInt(5) || passwortListe.getSelectedIndex() == 2) {
-                    model.addRow(new Object[]{ st.getString("Telefon"), st.getString("Adresse"), st.getString("Name")});
-               // }
+            ps=Utils.getConnection().prepareStatement(ss);
+            st=ps.executeQuery();
+            while(st.next()){
+                 model.addRow(new Object[]{st.getString("Telefon"), st.getString("Adresse"), st.getString("Name")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        }}
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       int selectedRow =kundeTabele.getSelectedRow();
+     model=(DefaultTableModel) kundeTabele.getModel();
+     String sss=model.getValueAt(selectedRow,2).toString();
+        int ii = JOptionPane.showConfirmDialog(null, "Sind Sie sicher?", "Sicherheit Frage", JOptionPane.OK_CANCEL_OPTION);
+        if (ii == JOptionPane.OK_OPTION) {
+           
+                try {
+                    ps = Utils.getConnection().prepareStatement("DELETE FROM kunde WHERE Name=?");
+                    ps.setString(1, sss);
+                    ps.executeUpdate();
+                    showKunde();
+                     JOptionPane.showMessageDialog(null, "لقد تم حذف الزيون");
+                 //   Show_Product_In_JTable();                                   
+                } catch (SQLException ex) {
+                    Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+                    //Zeig mir Massege
+                    JOptionPane.showMessageDialog(null, "لم يتم حذف الزيون");
+                
+                 } 
+            }else if (ii == JOptionPane.CANCEL_OPTION) {
+                JOptionPane.showMessageDialog(null, "alles klar", "Sicherheit Frage", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -217,7 +229,7 @@ public class ShowKunde extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable kundeTabele;
+    private static javax.swing.JTable kundeTabele;
     private javax.swing.JTextField suchKunde;
     // End of variables declaration//GEN-END:variables
 }

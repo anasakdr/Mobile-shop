@@ -13,16 +13,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static mobil.ShowKunde.model;
 
 /**
  *
  * @author Anas
  */
 public class Sell extends javax.swing.JPanel {
-     public static ResultSet rs=null;
-     public static PreparedStatement ps;
-     DefaultTableModel model;
-      int rowCount;
+
+    public static ResultSet rs = null;
+    public static PreparedStatement ps;
+    DefaultTableModel model;
+    int rowCount;
+
     /**
      * Creates new form Sell
      */
@@ -40,8 +43,6 @@ public class Sell extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         vkTabele = new javax.swing.JTable();
@@ -52,7 +53,7 @@ public class Sell extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         wareBox = new javax.swing.JComboBox<>();
         löschen = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        sellB = new javax.swing.JButton();
         insterWare = new javax.swing.JButton();
         summmm = new javax.swing.JLabel();
         quanFeld = new javax.swing.JTextField();
@@ -67,12 +68,6 @@ public class Sell extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 255, 255));
         jLabel2.setText("الزبون");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel3.setText("الفاتورة");
-
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 255, 255));
@@ -150,12 +145,12 @@ public class Sell extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 51, 51));
-        jButton2.setText("انشاء فاتورة");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        sellB.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        sellB.setForeground(new java.awt.Color(255, 51, 51));
+        sellB.setText("انشاء فاتورة");
+        sellB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                sellBActionPerformed(evt);
             }
         });
 
@@ -214,7 +209,7 @@ public class Sell extends javax.swing.JPanel {
                         .addComponent(jLabel4)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(sellB)
                         .addGap(118, 118, 118)
                         .addComponent(löschen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -228,37 +223,38 @@ public class Sell extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addGap(125, 125, 125)
-                        .addComponent(sum, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+                        .addComponent(sum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(242, 242, 242)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(41, 41, 41)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(insterWare))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(kundenBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))))
-                        .addGap(18, 18, 18)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(66, 66, 66)
-                                .addComponent(jLabel9))
-                            .addComponent(jLabel2)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(125, 125, 125))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(insterWare)
+                                .addGap(8, 8, 8))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel10)))
+                        .addGap(105, 105, 105)
+                        .addComponent(jLabel9))
+                    .addComponent(jLabel2))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -267,34 +263,36 @@ public class Sell extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
                             .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(datumL, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(1, 1, 1))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(datumL, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(1, 1, 1))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel7)
-                                .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)))))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(insterWare)
-                    .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(insterWare))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -305,13 +303,13 @@ public class Sell extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(löschen)
-                    .addComponent(jButton2))
+                    .addComponent(sellB))
                 .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      Mobil.cl.show(Mobil.cardPanel, "Liste"); 
+        Mobil.cl.show(Mobil.cardPanel, "Liste");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -319,19 +317,18 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void vkTabeleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vkTabeleMouseClicked
-    
-        
+
+
     }//GEN-LAST:event_vkTabeleMouseClicked
 
     private void sumAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_sumAncestorAdded
-      try {
+        try {
             String ss = "SELECT quantitaet FROM ware WHERE Name=? ";
             ps = Utils.getConnection().prepareStatement(ss);
             ps.setInt(1, wareBox.getSelectedIndex());
-            rs=ps.executeQuery(); 
-            while(rs.next()){
-               
-                
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,17 +336,17 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_sumAncestorAdded
 //اظهارالعدد الباقي
     private void wareBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_wareBoxPopupMenuWillBecomeInvisible
-       
-        String tmp=(String)wareBox.getSelectedItem();
+
+        String tmp = (String) wareBox.getSelectedItem();
         try {
             String ss = "SELECT quantitaet FROM ware WHERE Name=? ";
             ps = Utils.getConnection().prepareStatement(ss);
             ps.setString(1, tmp);
-            rs=ps.executeQuery(); 
-            while(rs.next()){
-               String add=rs.getString("quantitaet");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String add = rs.getString("quantitaet");
                 sum.setText(add);
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
@@ -357,140 +354,162 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_wareBoxPopupMenuWillBecomeInvisible
 
     private void insterWareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insterWareActionPerformed
-    String price;
-    double totelprise=0;
-    double summe;
-    if(!Utils.isEmpty(quanFeld.getText())){
-      int s=Integer.parseInt(sum.getText());
-      int quan=Integer.parseInt(quanFeld.getText());
-      int sum1=s-quan;
-      sum.setText(String.valueOf(sum1));
-      
-        model = (DefaultTableModel) vkTabele.getModel();
-        rowCount = model.getRowCount();
-      String query="SELECT `Verkaufprise` FROM `ware` WHERE Name=?";
-      
-    try {
-        ps=Utils.getConnection().prepareStatement(query);
-        ps.setString(1, wareBox.getSelectedItem().toString());
-        rs=ps.executeQuery();
-        
-        
-        while(rs.next()){
-      double l=Double.parseDouble(rs.getString("Verkaufprise"));
-             summe=l*quan;
-             model.addRow(new Object[]{(summe),(rs.getString(1)),quanFeld.getText(),wareBox.getSelectedItem()});
-             for(int i=0;i<model.getRowCount();i++)
-             {
-                  int Amount = Integer.parseInt(model.getValueAt(i, 1)+"");
-                  totelprise=Amount+totelprise;     
-             }
-             summmm.setText(Double.toString(totelprise*quan));
-            
-             quanFeld.setText("");
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        String price;
+        double totelprise = 0;
+        double summe;
+        if (!Utils.isEmpty(quanFeld.getText())) {
+            int s = Integer.parseInt(sum.getText());
+            int quan = Integer.parseInt(quanFeld.getText());
+            int sum1 = s - quan;
+            sum.setText(String.valueOf(sum1));
 
-      }else{
-    JOptionPane.showMessageDialog(null,"الرجاء ادخال الكمية");
-    
-}
+            model = (DefaultTableModel) vkTabele.getModel();
+            rowCount = model.getRowCount();
+            String query = "SELECT `Verkaufprise` FROM `ware` WHERE Name=?";
+
+            try {
+                ps = Utils.getConnection().prepareStatement(query);
+                ps.setString(1, wareBox.getSelectedItem().toString());
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    double l = Double.parseDouble(rs.getString("Verkaufprise"));
+                    summe = l * quan;
+                    model.addRow(new Object[]{(summe), (rs.getString(1)), quanFeld.getText(), wareBox.getSelectedItem()});
+                    for (int i = 0; i < model.getRowCount(); i++) {
+                        int Amount = Integer.parseInt(model.getValueAt(i, 1) + "");
+                        totelprise = Amount + totelprise;
+                    }
+                    summmm.setText(Double.toString(totelprise * quan));
+
+                    quanFeld.setText("");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "الرجاء ادخال الكمية");
+
+        }
     }//GEN-LAST:event_insterWareActionPerformed
 
     private void quanFeldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quanFeldKeyTyped
-         char c=evt.getKeyChar();
-       if(!(Character.isDigit(c)|| (c==KeyEvent.VK_BACK_SPACE)||c==KeyEvent.VK_DELETE )){getToolkit().beep();evt.consume();}
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
+            getToolkit().beep();
+            evt.consume();
+        }
     }//GEN-LAST:event_quanFeldKeyTyped
 
     private void löschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_löschenActionPerformed
         model = (DefaultTableModel) vkTabele.getModel();
-        int selectedRow=vkTabele.getSelectedRow();
+        int selectedRow = vkTabele.getSelectedRow();
         model.removeRow(selectedRow);
+
     }//GEN-LAST:event_löschenActionPerformed
 
     private void kundenBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_kundenBoxPopupMenuWillBecomeInvisible
-       
+
     }//GEN-LAST:event_kundenBoxPopupMenuWillBecomeInvisible
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int kundeId=0;
-        String w="SELECT ID FROM kunde WHERE Name=? ";
-         try {
-             ps=Utils.getConnection().prepareStatement(w);
-             ps.setString(1, kundenBox.getSelectedItem().toString());
-            rs= ps.executeQuery();
-            while(rs.next()){
-                kundeId=rs.getInt(1);
+    private void sellBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellBActionPerformed
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf
+                = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String currentTime = sdf.format(dt);
+        int wareId = 0;
+        int kundeId = 0;
+        String w = "SELECT ID FROM kunde WHERE Name=? ";
+        try {
+            ps = Utils.getConnection().prepareStatement(w);
+            ps.setString(1, kundenBox.getSelectedItem().toString());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                kundeId = rs.getInt(1);
             }
-         } catch (SQLException ex) {
-             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
-        
-        
-        
-        String s="INSERT INTO sell(Kundeid,datum)VALUES(?,?) ";
-         try {
-             ps=Utils.getConnection().prepareStatement(s);
-             ps.setInt(1, kundeId);
-             ps.setString(2,datumL.getText());
-           
-            
-             ps.executeUpdate();
-         } catch (SQLException ex) {
-             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
-         }
-       
-    }//GEN-LAST:event_jButton2ActionPerformed
-public static void liste(){
-           wareBox.removeAllItems();
-       try {
+        } catch (SQLException ex) {
+            Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int selectedRow = vkTabele.getSelectedRow();
+        model = (DefaultTableModel) vkTabele.getModel();
+        String ware = model.getValueAt(selectedRow, 3).toString();
+        String ss = model.getValueAt(selectedRow, 2).toString();
+
+        w = "SELECT ID FROM ware WHERE Name=? ";
+        try {
+            ps = Utils.getConnection().prepareStatement(w);
+            ps.setString(1, ware);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                wareId = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String s = "INSERT INTO abrechnung(Kundeid,datum,wareid,quan)VALUES(?,?,?,?) ";
+
+        try {
+            ps = Utils.getConnection().prepareStatement(s);
+            ps.setInt(1, kundeId);
+            ps.setString(2, currentTime);
+            ps.setInt(3, wareId);
+            ps.setString(4, ss);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_sellBActionPerformed
+    public static void liste() {
+        wareBox.removeAllItems();
+        try {
             String ss = "SELECT Name FROM ware ";
             ps = Utils.getConnection().prepareStatement(ss);
-            rs=ps.executeQuery(); 
-            while(rs.next()){
-                String name=rs.getString("Name");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("Name");
                 wareBox.addItem(name);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
-public static void liste1(){
-           kundenBox.removeAllItems();
-       try {
+    }
+
+    public static void liste1() {
+        kundenBox.removeAllItems();
+        try {
             String ss = "SELECT Name FROM kunde ";
             ps = Utils.getConnection().prepareStatement(ss);
-            rs=ps.executeQuery(); 
-            while(rs.next()){
-                String name=rs.getString("Name");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("Name");
                 kundenBox.addItem(name);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel datumL;
     private javax.swing.JButton insterWare;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private static javax.swing.JComboBox<String> kundenBox;
     private javax.swing.JButton löschen;
     private javax.swing.JTextField quanFeld;
+    private javax.swing.JButton sellB;
     private javax.swing.JLabel sum;
     private javax.swing.JLabel summmm;
     private javax.swing.JTable vkTabele;
