@@ -5,6 +5,9 @@
  */
 package mobil;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,6 +64,7 @@ public class Sell extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         kundenBox = new javax.swing.JComboBox<>();
         datumL = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(24, 40, 108));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "المعتمد: المبيعات", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(255, 204, 204))); // NOI18N
@@ -196,6 +200,13 @@ public class Sell extends javax.swing.JPanel {
         datumL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         datumL.setText("Datum");
 
+        jButton1.setText("Drucken");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,6 +224,8 @@ public class Sell extends javax.swing.JPanel {
                         .addGap(118, 118, 118)
                         .addComponent(löschen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(59, 59, 59)
                         .addComponent(jButton3)
                         .addGap(119, 119, 119))))
             .addGroup(layout.createSequentialGroup()
@@ -303,7 +316,8 @@ public class Sell extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(löschen)
-                    .addComponent(sellB))
+                    .addComponent(sellB)
+                    .addComponent(jButton1))
                 .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -414,10 +428,12 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_kundenBoxPopupMenuWillBecomeInvisible
 
     private void sellBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellBActionPerformed
+        int abId = 0;
         java.util.Date dt = new java.util.Date();
         java.text.SimpleDateFormat sdf
                 = new java.text.SimpleDateFormat("yyyy-MM-dd");
         String currentTime = sdf.format(dt);
+        System.out.println(currentTime);
         int wareId = 0;
         int kundeId = 0;
         String w = "SELECT ID FROM kunde WHERE Name=? ";
@@ -432,38 +448,89 @@ public class Sell extends javax.swing.JPanel {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        int selectedRow = vkTabele.getSelectedRow();
+        int selectedRow = vkTabele.getRowCount();
+
         model = (DefaultTableModel) vkTabele.getModel();
-        String ware = model.getValueAt(selectedRow, 3).toString();
-        String ss = model.getValueAt(selectedRow, 2).toString();
-
-        w = "SELECT ID FROM ware WHERE Name=? ";
-        try {
-            ps = Utils.getConnection().prepareStatement(w);
-            ps.setString(1, ware);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                wareId = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        String s = "INSERT INTO abrechnung(Kundeid,datum,wareid,quan)VALUES(?,?,?,?) ";
+        String s = "INSERT INTO abrechnung(Kundeid,datum)VALUES(?,?) ";
 
         try {
             ps = Utils.getConnection().prepareStatement(s);
             ps.setInt(1, kundeId);
             ps.setString(2, currentTime);
-            ps.setInt(3, wareId);
-            ps.setString(4, ss);
             ps.executeUpdate();
 
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(selectedRow);
+        for (int i = 0; i < selectedRow; i++) {
+            String ware = model.getValueAt(i, 3).toString();
+            String menge = model.getValueAt(i, 2).toString();
 
+            w = "SELECT ID FROM ware WHERE Name=? ";
+            try {
+                ps = Utils.getConnection().prepareStatement(w);
+                ps.setString(1, ware);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    wareId = rs.getInt(1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            w = "SELECT ID FROM abrechnung WHERE Kundeid=? AND datum=? ";
+            try {
+                ps = Utils.getConnection().prepareStatement(w);
+                ps.setInt(1, kundeId);
+                ps.setString(2, currentTime);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    abId = rs.getInt(1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(abId);
+            String query = "INSERT INTO rechnungxware(abID,wareID,Menge)VALUES(?,?,?) ";
+            try {
+                ps = Utils.getConnection().prepareStatement(query);
+                ps.setInt(1, abId);
+                ps.setInt(2, wareId);
+                ps.setInt(3, Integer.parseInt(menge));
+                System.out.println("test1");
+                ps.executeUpdate();
+                System.out.println("test2");
+            } catch (SQLException ex) {
+                Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }//GEN-LAST:event_sellBActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try (PrintWriter writer = new PrintWriter(new File(System.getProperty("user.home")+File.separator+"test.csv"))) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("\"sep=,\"");
+            sb.append("\n");
+            sb.append("id");
+            sb.append(',');
+            sb.append("Name");
+            sb.append('\n');
+            
+            sb.append("1");
+            sb.append(',');
+            sb.append("Prashant Ghimire");
+            sb.append('\n');
+
+            writer.write(sb.toString());
+
+            System.out.println("done!");
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
     public static void liste() {
         wareBox.removeAllItems();
         try {
@@ -497,6 +564,7 @@ public class Sell extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel datumL;
     private javax.swing.JButton insterWare;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
