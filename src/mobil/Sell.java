@@ -374,6 +374,11 @@ public class Sell extends javax.swing.JPanel {
         if (!Utils.isEmpty(quanFeld.getText())) {
             int s = Integer.parseInt(sum.getText());
             int quan = Integer.parseInt(quanFeld.getText());
+            if(quan>s){
+                JOptionPane.showMessageDialog(null, "البضاعة المباعة اقل من الكمية الموجودة");
+                return;
+           
+            }
             int sum1 = s - quan;
             sum.setText(String.valueOf(sum1));
 
