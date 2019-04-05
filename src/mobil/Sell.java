@@ -359,18 +359,31 @@ public class Sell extends javax.swing.JPanel {
             rs = ps.executeQuery();
             while (rs.next()) {
                 String add = rs.getString("quantitaet");
+                int artikel=getRowArtikel(tmp);
+                if(artikel<0)
                 sum.setText(add);
-
+                else{
+                    int g= Integer.parseInt((String)vkTabele.getValueAt(artikel, 2));
+                    g=Integer.parseInt(add)-g;                 
+                    sum.setText(Integer.toString(g));
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_wareBoxPopupMenuWillBecomeInvisible
-
+    private int getRowArtikel(String artikel){
+       for(int i =0;i<vkTabele.getRowCount();i++){
+           
+            if(artikel.equals((String)vkTabele.getValueAt(i, 3))) return i;
+        }
+       return -1;
+    }
     private void insterWareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insterWareActionPerformed
         String price;
         double totelprise = 0;
         double summe;
+        
         if (!Utils.isEmpty(quanFeld.getText())) {
             int s = Integer.parseInt(sum.getText());
             int quan = Integer.parseInt(quanFeld.getText());
@@ -390,11 +403,23 @@ public class Sell extends javax.swing.JPanel {
                 ps = Utils.getConnection().prepareStatement(query);
                 ps.setString(1, wareBox.getSelectedItem().toString());
                 rs = ps.executeQuery();
+                
 
                 while (rs.next()) {
                     double l = Double.parseDouble(rs.getString("Verkaufprise"));
                     summe = l * quan;
-                    model.addRow(new Object[]{(summe), (rs.getString(1)), quanFeld.getText(), wareBox.getSelectedItem()});
+                    int rowArtikel = getRowArtikel(wareBox.getSelectedItem().toString());
+                    if(rowArtikel<0){
+                        model.addRow(new Object[]{(summe), (rs.getString(1)), quanFeld.getText(), wareBox.getSelectedItem()});
+                    }else{
+                        int g= Integer.parseInt((String)vkTabele.getValueAt(rowArtikel, 2));
+                        g=g+quan;
+                        
+                        vkTabele.setValueAt(Integer.toString(g), rowArtikel, 2);
+                        summe = l * g;
+                        vkTabele.setValueAt(summe, rowArtikel, 0);
+                    }
+                    
                     for (int i = 0; i < model.getRowCount(); i++) {
                         int Amount = Integer.parseInt(model.getValueAt(i, 1) + "");
                         totelprise = Amount + totelprise;

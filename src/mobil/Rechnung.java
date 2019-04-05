@@ -11,14 +11,15 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Anas
  */
 public class Rechnung extends javax.swing.JPanel {
-public static ResultSet rs = null;
+
+    public static ResultSet rs = null;
     public static PreparedStatement ps;
+
     /**
      * Creates new form Rechnung
      */
@@ -40,11 +41,11 @@ public static ResultSet rs = null;
         info = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        datum = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        datumBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(24, 40, 108));
 
@@ -68,11 +69,6 @@ public static ResultSet rs = null;
         jLabel3.setForeground(new java.awt.Color(255, 153, 153));
         jLabel3.setText("الزبون");
 
-        datum.setForeground(new java.awt.Color(195, 64, 64));
-        datum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "خلال هذا اليوم", "خلال هذا الاسبوع", "خلال هذا الشهر" }));
-        datum.setAlignmentX(33.0F);
-        datum.setEditor(null);
-
         jButton1.setText("حذف");
 
         jButton2.setText("اعادة طباعة");
@@ -81,6 +77,13 @@ public static ResultSet rs = null;
         jLabel5.setText("الفاتورة");
 
         jButton3.setText("العودة");
+
+        datumBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "dieseTag", "dieseWoche" }));
+        datumBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                datumBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -91,20 +94,19 @@ public static ResultSet rs = null;
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(datum, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(datumBox, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(61, 61, 61)
-                        .addComponent(jLabel3)
-                        .addGap(48, 48, 48))
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addGap(24, 24, 24))))
+                        .addComponent(jLabel5)))
+                .addGap(24, 24, 24))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(jButton3)
@@ -120,8 +122,8 @@ public static ResultSet rs = null;
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(datumBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -136,8 +138,49 @@ public static ResultSet rs = null;
                 .addGap(34, 34, 34))
         );
     }// </editor-fold>//GEN-END:initComponents
-public static void rechnungListe() {
-   rechnungId.removeAllItems();
+
+    private void datumBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datumBoxActionPerformed
+        rechnungId.removeAllItems();
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String currentTime = sdf.format(dt);
+        
+        switch (datumBox.getSelectedIndex()) {
+
+            case 0:
+                try {
+                    String query = "SELECT ID FROM abrechnung WHERE datum =?";
+                    ps = Utils.getConnection().prepareStatement(query);
+                    ps.setString(1, currentTime);
+                    rs = ps.executeQuery(); 
+                    while (rs.next()) {
+                        String name = rs.getString("ID");
+                        rechnungId.addItem(name);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
+            case 1:
+                try {
+                    String query = "SELECT ID FROM abrechnung WHERE datum BETWEEN ? AND ?";
+                    ps = Utils.getConnection().prepareStatement(query);
+                    ps.setString(1, currentTime);
+                    ps.setString(2, currentTime);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        String name = rs.getString("ID");
+                        rechnungId.addItem(name);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+        }
+    }//GEN-LAST:event_datumBoxActionPerformed
+    public static void rechnungListe() {
+        rechnungId.removeAllItems();
         try {
             String query = "SELECT ID FROM abrechnung ";
             ps = Utils.getConnection().prepareStatement(query);
@@ -152,7 +195,7 @@ public static void rechnungListe() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static javax.swing.JComboBox<String> datum;
+    private javax.swing.JComboBox<String> datumBox;
     private javax.swing.JTable info;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
