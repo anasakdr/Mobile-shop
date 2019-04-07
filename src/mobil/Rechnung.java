@@ -25,6 +25,7 @@ public class Rechnung extends javax.swing.JPanel {
      */
     public Rechnung() {
         initComponents();
+       
     }
 
     /**
@@ -36,22 +37,18 @@ public class Rechnung extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        rechnungId = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         info = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        kundeName = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         datumBox = new javax.swing.JComboBox<>();
+        rechnungId = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(24, 40, 108));
-
-        rechnungId.setForeground(new java.awt.Color(51, 51, 255));
-        rechnungId.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        rechnungId.setEditor(null);
 
         info.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -63,8 +60,8 @@ public class Rechnung extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(info);
 
-        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel2.setText("jLabel2");
+        kundeName.setForeground(new java.awt.Color(255, 153, 153));
+        kundeName.setText("jLabel2");
 
         jLabel3.setForeground(new java.awt.Color(255, 153, 153));
         jLabel3.setText("الزبون");
@@ -77,11 +74,22 @@ public class Rechnung extends javax.swing.JPanel {
         jLabel5.setText("الفاتورة");
 
         jButton3.setText("العودة");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        datumBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "dieseTag", "dieseWoche" }));
+        datumBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "خلال هذا اليوم", "خلال هذا الاسبوع" }));
         datumBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 datumBoxActionPerformed(evt);
+            }
+        });
+
+        rechnungId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rechnungIdActionPerformed(evt);
             }
         });
 
@@ -99,12 +107,12 @@ public class Rechnung extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(kundeName)
                         .addGap(61, 61, 61)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)))
                 .addGap(24, 24, 24))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -121,12 +129,12 @@ public class Rechnung extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(datumBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datumBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(kundeName)
                     .addComponent(jLabel3))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,6 +186,28 @@ public class Rechnung extends javax.swing.JPanel {
                 break;
         }
     }//GEN-LAST:event_datumBoxActionPerformed
+
+    private void rechnungIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechnungIdActionPerformed
+     /*try {
+         
+            String query = "SELECT  k.Name FROM `kunde` k,abrechnung a WHERE k.ID=a.Kundeid AND a.ID=?";
+            ps = Utils.getConnection().prepareStatement(query);
+            ps.setObject(1,rechnungId.getSelectedItem());
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                kundeName.setText(name);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
+    }//GEN-LAST:event_rechnungIdActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+          Mobil.cl.show(Mobil.cardPanel, "Liste");
+    }//GEN-LAST:event_jButton3ActionPerformed
     public static void rechnungListe() {
         rechnungId.removeAllItems();
         try {
@@ -199,10 +229,10 @@ public class Rechnung extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel kundeName;
     private static javax.swing.JComboBox<String> rechnungId;
     // End of variables declaration//GEN-END:variables
 }

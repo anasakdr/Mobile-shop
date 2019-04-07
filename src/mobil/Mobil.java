@@ -27,6 +27,8 @@ public class Mobil {
         cardPanel.add(new ShowKunde(), "ShowKunde");
         cardPanel.add(new show(), "show");
         cardPanel.add(new Rechnung(), "Rechnung");
+        cardPanel.add(new Betzahlt(), "Betzahlt");
+        cardPanel.add(new Rebaratur(), "Rebaratur");
         JFrame frame = new JFrame("CardLayout-Demo");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(cardPanel, BorderLayout.CENTER);
