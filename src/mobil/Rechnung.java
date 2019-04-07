@@ -164,10 +164,9 @@ public class Rechnung extends javax.swing.JPanel {
                 break;
             case 1:
                 try {
-                    String query = "SELECT ID FROM abrechnung WHERE datum BETWEEN ? AND ?";
+                    String query = "SELECT ID FROM abrechnung WHERE DATEDIFF(?,datum)<8";
                     ps = Utils.getConnection().prepareStatement(query);
                     ps.setString(1, currentTime);
-                    ps.setString(2, currentTime);
                     rs = ps.executeQuery();
                     while (rs.next()) {
                         String name = rs.getString("ID");
