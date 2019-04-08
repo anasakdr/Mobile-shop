@@ -14,13 +14,15 @@ import java.util.GregorianCalendar;
  * @author Anas
  */
 public class Liste extends javax.swing.JPanel {
-        GregorianCalendar now = new GregorianCalendar();
-        DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
-        String datum = df.format(now.getTime());
-          java.util.Date dt = new java.util.Date();
-        java.text.SimpleDateFormat sdf
-                = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        String currentTime = sdf.format(dt);
+
+    GregorianCalendar now = new GregorianCalendar();
+    DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+    String datum = df.format(now.getTime());
+    java.util.Date dt = new java.util.Date();
+    java.text.SimpleDateFormat sdf
+            = new java.text.SimpleDateFormat("yyyy-MM-dd");
+    String currentTime = sdf.format(dt);
+
     /**
      * Creates new form Liste
      */
@@ -228,6 +230,11 @@ public class Liste extends javax.swing.JPanel {
         );
 
         jButton8.setText("الحسابات");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -248,7 +255,7 @@ public class Liste extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton8)
-                .addContainerGap())
+                .addGap(292, 292, 292))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,9 +267,9 @@ public class Liste extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jButton8)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -273,30 +280,30 @@ public class Liste extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      Mobil.cl.show(Mobil.cardPanel, "Kunden");
+        Mobil.cl.show(Mobil.cardPanel, "Kunden");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-     Mobil.cl.show(Mobil.cardPanel, "Product");
+        Mobil.cl.show(Mobil.cardPanel, "Product");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      Mobil.cl.show(Mobil.cardPanel, "show");
-      show.showWare();
+        Mobil.cl.show(Mobil.cardPanel, "show");
+        show.showWare();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     
+
         Mobil.cl.show(Mobil.cardPanel, "Sell");
-       
-         Sell.datumL.setText(currentTime);
-       Sell.liste();
-       Sell.liste1();
+
+        Sell.datumL.setText(currentTime);
+        Sell.liste();
+        Sell.liste1();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       Mobil.cl.show(Mobil.cardPanel, "ShowKunde");
-       ShowKunde.showKunde();
+        Mobil.cl.show(Mobil.cardPanel, "ShowKunde");
+        ShowKunde.showKunde();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -304,21 +311,31 @@ public class Liste extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       Mobil.cl.show(Mobil.cardPanel, "Rechnung");
-       Rechnung.rechnungListe();
+        Mobil.cl.show(Mobil.cardPanel, "Rechnung");
+        Rechnung.rechnungListe();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         Mobil.cl.show(Mobil.cardPanel, "Betzahlt");
-         Betzahlt.datumL.setText(currentTime);
-         Betzahlt.liste();
+        Betzahlt.datumL.setText(currentTime);
+        Betzahlt.liste();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-          Mobil.cl.show(Mobil.cardPanel, "Betzahlt");
-          Rebaratur.datumL.setText(currentTime);
-          
+        Mobil.cl.show(Mobil.cardPanel, "Rebaratur");
+        Rebaratur.datumL.setText(currentTime);
+
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        Mobil.cl.show(Mobil.cardPanel, "Geld");
+        Geld.ekZeigen();
+        Geld.vkZeigen();
+        Geld.rkZeigen();
+        Geld.bkZeigen();
+        Geld.verkaufZeigen();
+
+    }//GEN-LAST:event_jButton8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

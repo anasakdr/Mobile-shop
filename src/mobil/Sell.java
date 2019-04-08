@@ -490,7 +490,6 @@ public class Sell extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(selectedRow);
         for (int i = 0; i < selectedRow; i++) {
             String ware = model.getValueAt(i, 3).toString();
             String menge = model.getValueAt(i, 2).toString();
@@ -518,16 +517,26 @@ public class Sell extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(abId);
             String query = "INSERT INTO rechnungxware(abID,wareID,Menge)VALUES(?,?,?) ";
             try {
                 ps = Utils.getConnection().prepareStatement(query);
                 ps.setInt(1, abId);
                 ps.setInt(2, wareId);
                 ps.setInt(3, Integer.parseInt(menge));
-                System.out.println("test1");
                 ps.executeUpdate();
-                System.out.println("test2");
+            } catch (SQLException ex) {
+                Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String query1 = "UPDATE `ware` SET `quantitaet`= quantitaet-? WHERE ID =?";
+            try {
+                ps = Utils.getConnection().prepareStatement(query1);
+               ps.setInt(1, Integer.parseInt(menge));
+                ps.setInt(2, wareId);
+                System.out.println(menge);
+                System.out.println(wareId);
+                ps.executeUpdate();
+                 Mobil.cl.show(Mobil.cardPanel, "Liste");
+                
             } catch (SQLException ex) {
                 Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
             }

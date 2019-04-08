@@ -5,6 +5,7 @@
  */
 package mobil;
 
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,6 +76,11 @@ public class Betzahlt extends javax.swing.JPanel {
         });
 
         geldeFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        geldeFeld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                geldeFeldKeyTyped(evt);
+            }
+        });
 
         begrundungFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
@@ -157,10 +163,14 @@ public class Betzahlt extends javax.swing.JPanel {
             ps.setString(2, geldeFeld.getText());
             ps.setString(3, begrundungFeld.getText());
             ps.setString(4, currentTime);
-           if(!Utils.isEmpty(geldeFeld.getText(),begrundungFeld.getText())){ ps.executeUpdate();}else{
-               JOptionPane.showMessageDialog(null,"احد الحقول فارغة");
-               return;
-           }
+            if (!Utils.isEmpty(geldeFeld.getText(), begrundungFeld.getText())) {
+                ps.executeUpdate();
+                geldeFeld.setText("");
+                begrundungFeld.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "احد الحقول فارغة");
+                return;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Betzahlt.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -182,6 +192,14 @@ public class Betzahlt extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Mobil.cl.show(Mobil.cardPanel, "Liste");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void geldeFeldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_geldeFeldKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_geldeFeldKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
