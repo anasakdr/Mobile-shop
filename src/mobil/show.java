@@ -56,8 +56,8 @@ public class show extends javax.swing.JPanel {
         jLabel1.setText(" المادة");
 
         suchName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                suchNameKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                suchNameKeyTyped(evt);
             }
         });
 
@@ -66,7 +66,7 @@ public class show extends javax.swing.JPanel {
 
             },
             new String [] {
-                "سعر البيع", "سعر الشراء", "الكمية", "اسم المادة"
+                "التاريخ", "سعر البيع", "سعر الشراء", "الكمية", "اسم المادة"
             }
         ));
         jScrollPane1.setViewportView(wareTabele);
@@ -141,7 +141,6 @@ public class show extends javax.swing.JPanel {
                                 .addComponent(jLabel1)
                                 .addGap(37, 37, 37))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel9)
                                 .addContainerGap())))))
         );
@@ -185,40 +184,17 @@ public class show extends javax.swing.JPanel {
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        String ss="SELECT * FROM ware ";
+        String ss="SELECT w.Name,k.kaufpreise,k.datum,k.quan,k.vkpreise FROM ware w, kaufware k WHERE w.ID=k.wareId  ";
         try {
             ps=Utils.getConnection().prepareStatement(ss);
             st=ps.executeQuery();
             while(st.next()){
-                 model.addRow(new Object[]{st.getString("Verkaufprise"), st.getString("Kaufpreis"), st.getString("quantitaet"), st.getString("Name")});
+                 model.addRow(new Object[]{st.getString("datum"),st.getString("vkpreise"), st.getString("kaufpreise"), st.getString("quan"), st.getString("Name")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
-    private void suchNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suchNameKeyReleased
-         model = (DefaultTableModel) wareTabele.getModel();
-        rowCount = model.getRowCount();
-        //Löcht alle zeile von unsere Tabelle
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        try {
-            String query = "SELECT * FROM ware WHERE Name=?";
-        
-            ps = Utils.getConnection().prepareStatement(query);
-            ps.setString(1, suchName.getText());
-            st = ps.executeQuery();
-            while (st.next()) {
-               // if (passwortListe.getSelectedIndex() == rs.getInt(5) || passwortListe.getSelectedIndex() == 2) {
-                    model.addRow(new Object[]{st.getString("Verkaufprise"), st.getString("Kaufpreis"), st.getString("quantitaet"), st.getString("Name")});
-               // }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_suchNameKeyReleased
-
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         int index =wareTabele.getSelectedRow();
         model=(DefaultTableModel) wareTabele.getModel();
@@ -255,6 +231,27 @@ public class show extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "alles klar", "Sicherheit Frage", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void suchNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suchNameKeyTyped
+         model = (DefaultTableModel) wareTabele.getModel();
+        rowCount = model.getRowCount();
+        //Löcht alle zeile von unsere Tabelle
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        try {
+            String query = "SELECT w.Name,k.kaufpreise,k.datum,k.quan,k.vkpreise FROM ware w, kaufware k WHERE w.ID=k.wareId AND w.Name LIKE ?";
+        
+            ps = Utils.getConnection().prepareStatement(query);
+            ps.setString(1, suchName.getText()+ "%");
+            st = ps.executeQuery();
+            while (st.next()) {       
+                    model.addRow(new Object[]{st.getString("datum"),st.getString("vkpreise"), st.getString("kaufpreise"), st.getString("quan"), st.getString("Name")});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_suchNameKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

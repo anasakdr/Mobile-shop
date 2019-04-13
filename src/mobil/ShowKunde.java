@@ -52,8 +52,8 @@ public class ShowKunde extends javax.swing.JPanel {
 
         suchKunde.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         suchKunde.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                suchKundeKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                suchKundeKeyTyped(evt);
             }
         });
 
@@ -155,29 +155,6 @@ public class ShowKunde extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Mobil.cl.show(Mobil.cardPanel, "Liste");
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void suchKundeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suchKundeKeyReleased
-       model = (DefaultTableModel) kundeTabele.getModel();
-        rowCount = model.getRowCount();
-        //Löcht alle zeile von unsere Tabelle
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        try {
-            String query = "SELECT * FROM kunde WHERE Name=?";
-        
-            ps = Utils.getConnection().prepareStatement(query);
-            ps.setString(1, suchKunde.getText());
-            st = ps.executeQuery();
-            while (st.next()) {
-               // if (passwortListe.getSelectedIndex() == rs.getInt(5) || passwortListe.getSelectedIndex() == 2) {
-                    model.addRow(new Object[]{ st.getString("Telefon"), st.getString("Adresse"), st.getString("Name")});
-               // }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_suchKundeKeyReleased
  public static void showKunde(){
               model = (DefaultTableModel) kundeTabele.getModel();
         rowCount = model.getRowCount();
@@ -219,6 +196,29 @@ public class ShowKunde extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "alles klar", "Sicherheit Frage", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void suchKundeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suchKundeKeyTyped
+        model = (DefaultTableModel) kundeTabele.getModel();
+        rowCount = model.getRowCount();
+        //Löcht alle zeile von unsere Tabelle
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        try {
+            String query = "SELECT * FROM kunde WHERE Name like ?";
+        
+            ps = Utils.getConnection().prepareStatement(query);
+            ps.setString(1, suchKunde.getText()+ "%");
+            st = ps.executeQuery();
+            while (st.next()) {
+               // if (passwortListe.getSelectedIndex() == rs.getInt(5) || passwortListe.getSelectedIndex() == 2) {
+                    model.addRow(new Object[]{ st.getString("Telefon"), st.getString("Adresse"), st.getString("Name")});
+               // }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_suchKundeKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

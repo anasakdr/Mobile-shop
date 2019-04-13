@@ -336,7 +336,7 @@ public class Sell extends javax.swing.JPanel {
 
     private void sumAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_sumAncestorAdded
         try {
-            String ss = "SELECT quantitaet FROM ware WHERE Name=? ";
+            String ss = "SELECT quantit FROM ware WHERE Name=? ";
             ps = Utils.getConnection().prepareStatement(ss);
             ps.setInt(1, wareBox.getSelectedIndex());
             rs = ps.executeQuery();
@@ -352,12 +352,12 @@ public class Sell extends javax.swing.JPanel {
 
         String tmp = (String) wareBox.getSelectedItem();
         try {
-            String ss = "SELECT quantitaet FROM ware WHERE Name=? ";
+            String ss = "SELECT quantit FROM ware WHERE Name=? ";
             ps = Utils.getConnection().prepareStatement(ss);
             ps.setString(1, tmp);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String add = rs.getString("quantitaet");
+                String add = rs.getString("quantit");
                 int artikel=getRowArtikel(tmp);
                 if(artikel<0)
                 sum.setText(add);
@@ -380,7 +380,7 @@ public class Sell extends javax.swing.JPanel {
     }
     private void insterWareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insterWareActionPerformed
         String price;
-        double totelprise = 0;
+        double totelprise = 0.0;
         double summe;
         
         if (!Utils.isEmpty(quanFeld.getText())) {
@@ -396,7 +396,7 @@ public class Sell extends javax.swing.JPanel {
 
             model = (DefaultTableModel) vkTabele.getModel();
             rowCount = model.getRowCount();
-            String query = "SELECT `Verkaufprise` FROM `ware` WHERE Name=?";
+            String query = "SELECT kaufware.vkpreise FROM `kaufware`,ware WHERE kaufware.wareId=ware.ID AND kaufware.datum=(SELECT MAX(kaufware.datum) FROM kaufware) AND ware.Name=?";
 
             try {
                 ps = Utils.getConnection().prepareStatement(query);
@@ -405,7 +405,7 @@ public class Sell extends javax.swing.JPanel {
                 
 
                 while (rs.next()) {
-                    double l = Double.parseDouble(rs.getString("Verkaufprise"));
+                    double l = Double.parseDouble(rs.getString("vkpreise"));
                     summe = l * quan;
                     int rowArtikel = getRowArtikel(wareBox.getSelectedItem().toString());
                     if(rowArtikel<0){
@@ -420,10 +420,10 @@ public class Sell extends javax.swing.JPanel {
                     }
                     
                     for (int i = 0; i < model.getRowCount(); i++) {
-                        int Amount = Integer.parseInt(model.getValueAt(i, 1) + "");
+                        double Amount = Double.parseDouble(model.getValueAt(i, 0) + "");
                         totelprise = Amount + totelprise;
                     }
-                    summmm.setText(Double.toString(totelprise * quan));
+                    summmm.setText(Double.toString(totelprise ));
 
                     quanFeld.setText("");
                 }
@@ -446,9 +446,15 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_quanFeldKeyTyped
 
     private void löschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_löschenActionPerformed
-        model = (DefaultTableModel) vkTabele.getModel();
+       model = (DefaultTableModel) vkTabele.getModel();
         int selectedRow = vkTabele.getSelectedRow();
+        if(selectedRow>=0){
         model.removeRow(selectedRow);
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"لم تقم بتحديد اي من الاسطر");
+            return;
+        }
 
     }//GEN-LAST:event_löschenActionPerformed
 
@@ -479,12 +485,13 @@ public class Sell extends javax.swing.JPanel {
         int selectedRow = vkTabele.getRowCount();
 
         model = (DefaultTableModel) vkTabele.getModel();
-        String s = "INSERT INTO abrechnung(Kundeid,datum)VALUES(?,?) ";
+        String s = "INSERT INTO abrechnung(Kundeid,datum,gesamt)VALUES(?,?,?) ";
 
         try {
             ps = Utils.getConnection().prepareStatement(s);
             ps.setInt(1, kundeId);
             ps.setString(2, currentTime);
+            ps.setString(3, summmm.getText());
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -527,7 +534,7 @@ public class Sell extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String query1 = "UPDATE `ware` SET `quantitaet`= quantitaet-? WHERE ID =?";
+            String query1 = "UPDATE `ware` SET `quantit`= quantit-? WHERE ID =?";
             try {
                 ps = Utils.getConnection().prepareStatement(query1);
                ps.setInt(1, Integer.parseInt(menge));

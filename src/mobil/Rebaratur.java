@@ -64,6 +64,11 @@ public class Rebaratur extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 102, 51));
         jLabel4.setText("قيمة الصيانة");
 
+        nameF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        ursacheF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        geldF.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         geldF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 geldFKeyTyped(evt);

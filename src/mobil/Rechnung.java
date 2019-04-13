@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import static mobil.show.model;
+import static mobil.show.rowCount;
 
 /**
  *
@@ -25,7 +28,7 @@ public class Rechnung extends javax.swing.JPanel {
      */
     public Rechnung() {
         initComponents();
-       
+
     }
 
     /**
@@ -47,6 +50,10 @@ public class Rechnung extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         datumBox = new javax.swing.JComboBox<>();
         rechnungId = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        info1 = new javax.swing.JTable();
+        suchA = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(24, 40, 108));
 
@@ -55,7 +62,7 @@ public class Rechnung extends javax.swing.JPanel {
 
             },
             new String [] {
-                "السعر الاجمالي", "السعر", "الكمية", "المادة"
+                "السعر الاجمالي", "التاريخ", "الفاتورة"
             }
         ));
         jScrollPane1.setViewportView(info);
@@ -69,6 +76,11 @@ public class Rechnung extends javax.swing.JPanel {
         jButton1.setText("حذف");
 
         jButton2.setText("اعادة طباعة");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setForeground(new java.awt.Color(255, 153, 153));
         jLabel5.setText("الفاتورة");
@@ -93,6 +105,29 @@ public class Rechnung extends javax.swing.JPanel {
             }
         });
 
+        info1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "السعر الاجمالي", "السعر", "الكمية", "المادة"
+            }
+        ));
+        jScrollPane2.setViewportView(info1);
+        if (info1.getColumnModel().getColumnCount() > 0) {
+            info1.getColumnModel().getColumn(1).setHeaderValue("السعر");
+        }
+
+        suchA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                suchAKeyTyped(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 255, 255));
+        jLabel1.setText("الزبون");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,6 +139,10 @@ public class Rechnung extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(datumBox, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(suchA, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -123,6 +162,11 @@ public class Rechnung extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(81, 81, 81))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,38 +175,43 @@ public class Rechnung extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(datumBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(suchA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kundeName)
                     .addComponent(jLabel3))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addGap(34, 34, 34))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(304, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(78, 78, 78)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void datumBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datumBoxActionPerformed
-        rechnungId.removeAllItems();
         java.util.Date dt = new java.util.Date();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         String currentTime = sdf.format(dt);
-        
         switch (datumBox.getSelectedIndex()) {
-
             case 0:
+                rechnungId.removeAllItems();
                 try {
-                    String query = "SELECT ID FROM abrechnung WHERE datum =?";
+                    String query = "SELECT kunde.Name FROM kunde,abrechnung WHERE kunde.ID=abrechnung.Kundeid AND abrechnung.datum=?";
                     ps = Utils.getConnection().prepareStatement(query);
                     ps.setString(1, currentTime);
-                    rs = ps.executeQuery(); 
+                    rs = ps.executeQuery();
                     while (rs.next()) {
-                        String name = rs.getString("ID");
+                        String name = rs.getString("kunde.Name");
                         rechnungId.addItem(name);
                     }
                 } catch (SQLException ex) {
@@ -171,13 +220,14 @@ public class Rechnung extends javax.swing.JPanel {
 
                 break;
             case 1:
+                rechnungId.removeAllItems();
                 try {
-                    String query = "SELECT ID FROM abrechnung WHERE DATEDIFF(?,datum)<8";
+                    String query = "SELECT kunde.Name FROM kunde,abrechnung WHERE kunde.ID=abrechnung.Kundeid AND DATEDIFF(?,abrechnung.datum)<8";
                     ps = Utils.getConnection().prepareStatement(query);
                     ps.setString(1, currentTime);
                     rs = ps.executeQuery();
                     while (rs.next()) {
-                        String name = rs.getString("ID");
+                        String name = rs.getString("kunde.Name");
                         rechnungId.addItem(name);
                     }
                 } catch (SQLException ex) {
@@ -188,7 +238,7 @@ public class Rechnung extends javax.swing.JPanel {
     }//GEN-LAST:event_datumBoxActionPerformed
 
     private void rechnungIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechnungIdActionPerformed
-     /*try {
+        /*try {
          
             String query = "SELECT  k.Name FROM `kunde` k,abrechnung a WHERE k.ID=a.Kundeid AND a.ID=?";
             ps = Utils.getConnection().prepareStatement(query);
@@ -202,12 +252,52 @@ public class Rechnung extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        
+
     }//GEN-LAST:event_rechnungIdActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-          Mobil.cl.show(Mobil.cardPanel, "Liste");
+        Mobil.cl.show(Mobil.cardPanel, "Liste");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+ try {
+            String query = "SELECT abrechnung.ID, abrechnung.datum, abrechnung.gesamt FROM abrechnung,kunde WHERE kunde.ID=abrechnung.Kundeid AND kunde.Name =?";
+        
+            ps = Utils.getConnection().prepareStatement(query);
+            ps.setString(1,"مهند");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getString("abrechnung.gesamt"));
+                System.out.println(suchA.getText());
+              
+                    model.addRow(new Object[]{ rs.getString("abrechnung.gesamt"), rs.getString("abrechnung.datum"), rs.getString("abrechnung.ID")});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+        }    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void suchAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suchAKeyTyped
+        model = (DefaultTableModel) info.getModel();
+        rowCount = model.getRowCount();
+        //Löcht alle zeile von unsere Tabelle
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        try {
+            String query = "SELECT abrechnung.ID, abrechnung.datum, abrechnung.gesamt FROM abrechnung,kunde WHERE kunde.ID=abrechnung.Kundeid AND kunde.Name=?";
+
+            ps = Utils.getConnection().prepareStatement(query);
+            ps.setString(1, suchA.getText()+ "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                model.addRow(new Object[]{ rs.getInt("abrechnung.gesamt"), rs.getString("abrechnung.datum"), rs.getString("abrechnung.ID")});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_suchAKeyTyped
     public static void rechnungListe() {
         rechnungId.removeAllItems();
         try {
@@ -226,13 +316,17 @@ public class Rechnung extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> datumBox;
     private javax.swing.JTable info;
+    private javax.swing.JTable info1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel kundeName;
     private static javax.swing.JComboBox<String> rechnungId;
+    private javax.swing.JTextField suchA;
     // End of variables declaration//GEN-END:variables
 }
