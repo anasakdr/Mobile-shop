@@ -14,7 +14,7 @@ public class Mobil {
     public static CardLayout cl;
     public static JPanel cardPanel;
     public static Connection conn;
-
+    public static String ware3;
     public Mobil() {
         cl = new CardLayout();
         cardPanel = new JPanel(cl);
@@ -30,6 +30,7 @@ public class Mobil {
         cardPanel.add(new Betzahlt(), "Betzahlt");
         cardPanel.add(new Rebaratur(), "Rebaratur");
         cardPanel.add(new Geld(), "Geld");
+        cardPanel.add(new Zeigen(), "Zeigen");
         JFrame frame = new JFrame("CardLayout-Demo");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(cardPanel, BorderLayout.CENTER);

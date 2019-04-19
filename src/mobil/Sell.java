@@ -65,9 +65,15 @@ public class Sell extends javax.swing.JPanel {
         kundenBox = new javax.swing.JComboBox<>();
         datumL = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        zzeigen = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(24, 40, 108));
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "المعتمد: المبيعات", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(255, 204, 204))); // NOI18N
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 255, 255));
@@ -139,6 +145,11 @@ public class Sell extends javax.swing.JPanel {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
+        wareBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                wareBoxKeyPressed(evt);
+            }
+        });
 
         löschen.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         löschen.setForeground(new java.awt.Color(255, 51, 51));
@@ -207,6 +218,21 @@ public class Sell extends javax.swing.JPanel {
             }
         });
 
+        zzeigen.setText("اظهار");
+        zzeigen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zzeigenActionPerformed(evt);
+            }
+        });
+        zzeigen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                zzeigenKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                zzeigenKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,21 +246,27 @@ public class Sell extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(datumL, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addGap(125, 125, 125)
-                        .addComponent(sum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(datumL, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addGap(125, 125, 125)
+                                .addComponent(sum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(242, 242, 242)
+                                .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addGap(41, 41, 41)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addGap(41, 41, 41)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
+                        .addComponent(zzeigen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -298,6 +330,9 @@ public class Sell extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                         .addComponent(insterWare))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 49, Short.MAX_VALUE)
+                        .addComponent(zzeigen)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(jLabel8))
@@ -575,6 +610,41 @@ public class Sell extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void zzeigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zzeigenActionPerformed
+        Mobil.ware3=(String)wareBox.getSelectedItem();
+         Mobil.cl.show(Mobil.cardPanel, "Zeigen");
+         Zeigen.anzeigen();
+    }//GEN-LAST:event_zzeigenActionPerformed
+
+    private void zzeigenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zzeigenKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_zzeigenKeyTyped
+
+    private void zzeigenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zzeigenKeyPressed
+         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+        
+
+        Mobil.cl.show(Mobil.cardPanel, "Zeigen");
+    }
+    }//GEN-LAST:event_zzeigenKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+        
+
+        Mobil.cl.show(Mobil.cardPanel, "Zeigen");
+    }
+
+    }//GEN-LAST:event_formKeyPressed
+
+    private void wareBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wareBoxKeyPressed
+       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+             Mobil.ware3=(String)wareBox.getSelectedItem();
+         Mobil.cl.show(Mobil.cardPanel, "Zeigen");
+         Zeigen.anzeigen();
+       }
+    }//GEN-LAST:event_wareBoxKeyPressed
     public static void liste() {
         wareBox.removeAllItems();
         try {
@@ -625,6 +695,7 @@ public class Sell extends javax.swing.JPanel {
     private javax.swing.JLabel sum;
     private javax.swing.JLabel summmm;
     private javax.swing.JTable vkTabele;
-    private static javax.swing.JComboBox<String> wareBox;
+    public static javax.swing.JComboBox<String> wareBox;
+    private javax.swing.JButton zzeigen;
     // End of variables declaration//GEN-END:variables
 }
