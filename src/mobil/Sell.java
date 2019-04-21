@@ -238,13 +238,20 @@ public class Sell extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(summmm)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(110, 110, 110)
+                .addComponent(jButton3)
+                .addGap(160, 160, 160)
+                .addComponent(löschen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(42, 42, 42)
+                .addComponent(sellB)
+                .addGap(102, 102, 102))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel10))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -255,54 +262,42 @@ public class Sell extends javax.swing.JPanel {
                                 .addGap(125, 125, 125)
                                 .addComponent(sum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(242, 242, 242)
-                                .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addContainerGap()
+                                .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8)
-                                .addGap(41, 41, 41)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addComponent(jLabel7)
+                                .addGap(58, 58, 58)
+                                .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(insterWare)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel8)))
+                .addGap(71, 71, 71)
+                .addComponent(jLabel9)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(summmm)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(zzeigen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(125, 125, 125))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(insterWare)
-                                .addGap(8, 8, 8))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                        .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel9))
-                    .addComponent(jLabel2))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1))
+                        .addComponent(zzeigen)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jButton3)
-                .addGap(160, 160, 160)
-                .addComponent(löschen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(42, 42, 42)
-                .addComponent(sellB)
-                .addGap(102, 102, 102))
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,25 +316,23 @@ public class Sell extends javax.swing.JPanel {
                                         .addGap(1, 1, 1))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel7)
-                                        .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                        .addComponent(insterWare))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 49, Short.MAX_VALUE)
-                        .addComponent(zzeigen)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8))
+                                        .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(wareBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(insterWare)
+                            .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(zzeigen)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(10, 10, 10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -393,12 +386,12 @@ public class Sell extends javax.swing.JPanel {
             rs = ps.executeQuery();
             while (rs.next()) {
                 String add = rs.getString("quantit");
-                int artikel=getRowArtikel(tmp);
-                if(artikel<0)
-                sum.setText(add);
-                else{
-                    int g= Integer.parseInt((String)vkTabele.getValueAt(artikel, 2));
-                    g=Integer.parseInt(add)-g;                 
+                int artikel = getRowArtikel(tmp);
+                if (artikel < 0) {
+                    sum.setText(add);
+                } else {
+                    int g = Integer.parseInt((String) vkTabele.getValueAt(artikel, 2));
+                    g = Integer.parseInt(add) - g;
                     sum.setText(Integer.toString(g));
                 }
             }
@@ -406,59 +399,61 @@ public class Sell extends javax.swing.JPanel {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_wareBoxPopupMenuWillBecomeInvisible
-    private int getRowArtikel(String artikel){
-       for(int i =0;i<vkTabele.getRowCount();i++){
-           
-            if(artikel.equals((String)vkTabele.getValueAt(i, 3))) return i;
+    private int getRowArtikel(String artikel) {
+        for (int i = 0; i < vkTabele.getRowCount(); i++) {
+
+            if (artikel.equals((String) vkTabele.getValueAt(i, 3))) {
+                return i;
+            }
         }
-       return -1;
+        return -1;
     }
     private void insterWareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insterWareActionPerformed
         String price;
         double totelprise = 0.0;
         double summe;
-        
+
         if (!Utils.isEmpty(quanFeld.getText())) {
             int s = Integer.parseInt(sum.getText());
             int quan = Integer.parseInt(quanFeld.getText());
-            if(quan>s){
+            if (quan > s) {
                 JOptionPane.showMessageDialog(null, "البضاعة المباعة اقل من الكمية الموجودة");
                 return;
-           
+
             }
             int sum1 = s - quan;
             sum.setText(String.valueOf(sum1));
 
             model = (DefaultTableModel) vkTabele.getModel();
             rowCount = model.getRowCount();
-            String query = "SELECT kaufware.vkpreise FROM `kaufware`,ware WHERE kaufware.wareId=ware.ID AND kaufware.datum=(SELECT MAX(kaufware.datum) FROM kaufware) AND ware.Name=?";
+            String query = "SELECT kaufware.vkpreise FROM `kaufware`,ware WHERE kaufware.wareId=ware.ID AND kaufware.datum=(SELECT MAX(kaufware.datum) "
+                    + "FROM kaufware) AND ware.Name=?";
 
             try {
                 ps = Utils.getConnection().prepareStatement(query);
                 ps.setString(1, wareBox.getSelectedItem().toString());
                 rs = ps.executeQuery();
-                
 
                 while (rs.next()) {
                     double l = Double.parseDouble(rs.getString("vkpreise"));
                     summe = l * quan;
                     int rowArtikel = getRowArtikel(wareBox.getSelectedItem().toString());
-                    if(rowArtikel<0){
+                    if (rowArtikel < 0) {
                         model.addRow(new Object[]{(summe), (rs.getString(1)), quanFeld.getText(), wareBox.getSelectedItem()});
-                    }else{
-                        int g= Integer.parseInt((String)vkTabele.getValueAt(rowArtikel, 2));
-                        g=g+quan;
-                        
+                    } else {
+                        int g = Integer.parseInt((String) vkTabele.getValueAt(rowArtikel, 2));
+                        g = g + quan;
+
                         vkTabele.setValueAt(Integer.toString(g), rowArtikel, 2);
                         summe = l * g;
                         vkTabele.setValueAt(summe, rowArtikel, 0);
                     }
-                    
+
                     for (int i = 0; i < model.getRowCount(); i++) {
                         double Amount = Double.parseDouble(model.getValueAt(i, 0) + "");
                         totelprise = Amount + totelprise;
                     }
-                    summmm.setText(Double.toString(totelprise ));
+                    summmm.setText(Double.toString(totelprise));
 
                     quanFeld.setText("");
                 }
@@ -481,13 +476,17 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_quanFeldKeyTyped
 
     private void löschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_löschenActionPerformed
-       model = (DefaultTableModel) vkTabele.getModel();
+       double totelprise = 0.0;
+        model = (DefaultTableModel) vkTabele.getModel();
         int selectedRow = vkTabele.getSelectedRow();
-        if(selectedRow>=0){
-        model.removeRow(selectedRow);
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"لم تقم بتحديد اي من الاسطر");
+        if (selectedRow >= 0) {      
+             double Amount = Double.parseDouble(model.getValueAt(selectedRow, 0) + "");
+             totelprise=Double.valueOf(summmm.getText());
+             totelprise = totelprise - Amount ;
+            summmm.setText(Double.toString(totelprise));
+            model.removeRow(selectedRow);
+        } else {
+            JOptionPane.showMessageDialog(null, "لم تقم بتحديد اي من الاسطر");
             return;
         }
 
@@ -572,12 +571,12 @@ public class Sell extends javax.swing.JPanel {
             String query1 = "UPDATE `ware` SET `quantit`= quantit-? WHERE ID =?";
             try {
                 ps = Utils.getConnection().prepareStatement(query1);
-               ps.setInt(1, Integer.parseInt(menge));
+                ps.setInt(1, Integer.parseInt(menge));
                 ps.setInt(2, wareId);
                 System.out.println(menge);
                 System.out.println(wareId);
                 ps.executeUpdate();
-                 Mobil.cl.show(Mobil.cardPanel, "Liste");
+                Mobil.cl.show(Mobil.cardPanel, "Liste");
                 
             } catch (SQLException ex) {
                 Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
@@ -587,7 +586,7 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_sellBActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try (PrintWriter writer = new PrintWriter(new File(System.getProperty("user.home")+File.separator+"test.csv"))) {
+        try (PrintWriter writer = new PrintWriter(new File(System.getProperty("user.home") + File.separator + "test.csv"))) {
             StringBuilder sb = new StringBuilder();
             sb.append("\"sep=,\"");
             sb.append("\n");
@@ -595,7 +594,7 @@ public class Sell extends javax.swing.JPanel {
             sb.append(',');
             sb.append("Name");
             sb.append('\n');
-            
+
             sb.append("1");
             sb.append(',');
             sb.append("Prashant Ghimire");
@@ -612,9 +611,9 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void zzeigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zzeigenActionPerformed
-        Mobil.ware3=(String)wareBox.getSelectedItem();
-         Mobil.cl.show(Mobil.cardPanel, "Zeigen");
-         Zeigen.anzeigen();
+        Mobil.ware3 = (String) wareBox.getSelectedItem();
+        Mobil.cl.show(Mobil.cardPanel, "Zeigen");
+        Zeigen.anzeigen();
     }//GEN-LAST:event_zzeigenActionPerformed
 
     private void zzeigenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zzeigenKeyTyped
@@ -622,28 +621,26 @@ public class Sell extends javax.swing.JPanel {
     }//GEN-LAST:event_zzeigenKeyTyped
 
     private void zzeigenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zzeigenKeyPressed
-         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-        Mobil.cl.show(Mobil.cardPanel, "Zeigen");
-    }
+            Mobil.cl.show(Mobil.cardPanel, "Zeigen");
+        }
     }//GEN-LAST:event_zzeigenKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-        Mobil.cl.show(Mobil.cardPanel, "Zeigen");
-    }
+            Mobil.cl.show(Mobil.cardPanel, "Zeigen");
+        }
 
     }//GEN-LAST:event_formKeyPressed
 
     private void wareBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wareBoxKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-             Mobil.ware3=(String)wareBox.getSelectedItem();
-         Mobil.cl.show(Mobil.cardPanel, "Zeigen");
-         Zeigen.anzeigen();
-       }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            Mobil.ware3 = (String) wareBox.getSelectedItem();
+            Mobil.cl.show(Mobil.cardPanel, "Zeigen");
+            Zeigen.anzeigen();
+        }
     }//GEN-LAST:event_wareBoxKeyPressed
     public static void liste() {
         wareBox.removeAllItems();

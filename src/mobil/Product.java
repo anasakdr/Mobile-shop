@@ -218,6 +218,7 @@ public class Product extends javax.swing.JPanel {
         int vk = Integer.valueOf(vkFeld.getText());
         int ek = Integer.valueOf(ekFeld.getText());
         int wareID = 0;
+        String datum = "";
         if (Utils.isEmpty(nameFeld.getText(), qFeld.getText(), ekFeld.getText(), vkFeld.getText())) {
             JOptionPane.showMessageDialog(null, "بعض الجداول فارغة");
             return;
@@ -231,11 +232,32 @@ public class Product extends javax.swing.JPanel {
                     wareID = rs.getInt("ID");
                     JOptionPane.showMessageDialog(null, "هذه المادة موجوة من قبل");
 
-                
-
-            }} catch (SQLException ex) {
+                }
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+
+            String ver1 = "SELECT datum FROM kaufware WHERE wareId =?";
+            try {
+                ps = Utils.getConnection().prepareStatement(ver1);
+                ps.setInt(1, wareID);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    datum = rs.getDate(1).toString();
+                    if (datum.equals(currentTime)) {
+                        JOptionPane.showMessageDialog(null, "هذه المادة تمت اضافتها اليوم مسبقا");
+                        nameFeld.setText("");
+                        qFeld.setText("");
+                        ekFeld.setText("");
+                        vkFeld.setText("");
+                        return;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             if (wareID != 0) {
                 String vers = "INSERT INTO kaufware( wareId,kaufpreise,datum,quan,vkpreise ) VALUES (?,?,?,?,?) ";
                 try {
@@ -249,22 +271,22 @@ public class Product extends javax.swing.JPanel {
                     nameFeld.setText("");
                     qFeld.setText("");
                     ekFeld.setText("");
-                    vkFeld.setText("");                      
-                   
+                    vkFeld.setText("");
 
                 } catch (SQLException ex) {
                     Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                 String query = "  UPDATE `ware` SET `quantit`=( SELECT SUM(quan) FROM kaufware WHERE ware.ID=kaufware.wareId AND kaufware.wareId=? )";
+                String query = "  UPDATE ware SET quantit=( SELECT SUM(quan) FROM kaufware WHERE  kaufware.wareId=?) WHERE ware.ID=? ";
                 try {
                     ps = Utils.getConnection().prepareStatement(query);
                     ps.setInt(1, wareID);
+                    ps.setInt(2, wareID);
                     ps.executeUpdate();
                     return;
                 } catch (SQLException ex) {
                     Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
-                } }
-            else {
+                }
+            } else {
                 try {
                     String ss = "INSERT INTO ware( Name,quantit ) VALUES (?,?)";
                     ps = Utils.getConnection().prepareStatement(ss);
@@ -279,8 +301,8 @@ public class Product extends javax.swing.JPanel {
                     Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try {
-                    String ver1 = "SELECT ID FROM ware WHERE Name =?";
-                    ps = Utils.getConnection().prepareStatement(ver1);
+                    String ver3 = "SELECT ID FROM ware WHERE Name =?";
+                    ps = Utils.getConnection().prepareStatement(ver3);
                     ps.setString(1, nameFeld.getText());
                     rs = ps.executeQuery();
                     while (rs.next()) {

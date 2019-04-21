@@ -206,9 +206,9 @@ public class Geld extends javax.swing.JPanel {
         Mobil.cl.show(Mobil.cardPanel, "Liste");
     }//GEN-LAST:event_jButton1ActionPerformed
 public static void ekZeigen(){
-    String query="SELECT SUM(`Kaufpreis`*quantitaet) as s FROM `ware`";
+    String query1="SELECT SUM(kaufpreise*quan) as s FROM kaufware";
         try {
-            ps = Utils.getConnection().prepareStatement(query);
+            ps = Utils.getConnection().prepareStatement(query1);
             rs=ps.executeQuery();
             while(rs.next()){
                eGeld.setText(rs.getString("s"));
@@ -219,7 +219,7 @@ public static void ekZeigen(){
     
 }
 public static void vkZeigen(){
-    String query="SELECT SUM(Verkaufprise*quantitaet)as s FROM `ware`";
+    String query="SELECT SUM(vkpreise*quan)as s FROM `kaufware`";
         try {
             ps = Utils.getConnection().prepareStatement(query);
             rs=ps.executeQuery();
@@ -232,7 +232,7 @@ public static void vkZeigen(){
     
 }
 public static void verkaufZeigen(){
-    String query="SELECT SUM(Verkaufprise*Menge)as s FROM `rechnungxware`,ware WHERE ware.ID=rechnungxware.wareID";
+    String query="SELECT SUM(vkpreise*Menge)as s FROM `rechnungxware`,kaufware WHERE kaufware.wareId=rechnungxware.wareID";
         try {
             ps = Utils.getConnection().prepareStatement(query);
             rs=ps.executeQuery();
@@ -273,7 +273,7 @@ public static void bkZeigen(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JLabel bGeld;
-    private static javax.swing.JLabel eGeld;
+    public static javax.swing.JLabel eGeld;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
