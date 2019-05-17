@@ -40,55 +40,25 @@ public class Rechnung extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        info = new javax.swing.JTable();
-        kundeName = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        Zurück = new javax.swing.JButton();
         datumBox = new javax.swing.JComboBox<>();
         rechnungId = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         info1 = new javax.swing.JTable();
-        suchA = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(24, 40, 108));
 
-        info.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "السعر الاجمالي", "التاريخ", "الفاتورة"
-            }
-        ));
-        jScrollPane1.setViewportView(info);
-
-        kundeName.setForeground(new java.awt.Color(255, 153, 153));
-        kundeName.setText("jLabel2");
-
-        jLabel3.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel3.setText("الزبون");
-
         jButton1.setText("حذف");
-
-        jButton2.setText("اعادة طباعة");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel5.setForeground(new java.awt.Color(255, 153, 153));
         jLabel5.setText("الفاتورة");
 
-        jButton3.setText("العودة");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Zurück.setText("العودة");
+        Zurück.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ZurückActionPerformed(evt);
             }
         });
 
@@ -118,47 +88,21 @@ public class Rechnung extends javax.swing.JPanel {
             info1.getColumnModel().getColumn(1).setHeaderValue("السعر");
         }
 
-        suchA.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                suchAKeyTyped(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 255, 255));
-        jLabel1.setText("الزبون");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(datumBox, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(suchA, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(kundeName)
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
                 .addGap(24, 24, 24))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(69, 69, 69)
-                .addComponent(jButton3)
-                .addGap(115, 115, 115)
-                .addComponent(jButton2)
+                .addComponent(Zurück)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(81, 81, 81))
@@ -175,26 +119,17 @@ public class Rechnung extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(datumBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(suchA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kundeName)
-                    .addComponent(jLabel3))
-                .addGap(58, 58, 58)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155)
+                    .addComponent(rechnungId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 376, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(Zurück))
                 .addGap(34, 34, 34))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(304, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(78, 78, 78)))
+                    .addContainerGap(131, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(118, 118, 118)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -202,102 +137,51 @@ public class Rechnung extends javax.swing.JPanel {
         java.util.Date dt = new java.util.Date();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         String currentTime = sdf.format(dt);
+         String query = "";
+         
+        rechnungId.removeAllItems();
         switch (datumBox.getSelectedIndex()) {
             case 0:
-                rechnungId.removeAllItems();
-                try {
-                    String query = "SELECT kunde.Name FROM kunde,abrechnung WHERE kunde.ID=abrechnung.Kundeid AND abrechnung.datum=?";
-                    ps = Utils.getConnection().prepareStatement(query);
-                    ps.setString(1, currentTime);
-                    rs = ps.executeQuery();
-                    while (rs.next()) {
-                        String name = rs.getString("kunde.Name");
-                        rechnungId.addItem(name);
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+                query="SELECT abrechnung.ID FROM abrechnung WHERE abrechnung.datum=?";
+                // String query = "SELECT kunde.Name FROM kunde,abrechnung WHERE kunde.ID=abrechnung.Kundeid AND abrechnung.datum=?";
                 break;
             case 1:
-                rechnungId.removeAllItems();
-                try {
-                    String query = "SELECT kunde.Name FROM kunde,abrechnung WHERE kunde.ID=abrechnung.Kundeid AND DATEDIFF(?,abrechnung.datum)<8";
+                query ="SELECT abrechnung.ID FROM abrechnung WHERE DATEDIFF(?,abrechnung.datum)<8";
+                break;
+        }
+        try {
                     ps = Utils.getConnection().prepareStatement(query);
                     ps.setString(1, currentTime);
                     rs = ps.executeQuery();
                     while (rs.next()) {
-                        String name = rs.getString("kunde.Name");
+                        String name = rs.getString("abrechnung.ID");
                         rechnungId.addItem(name);
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                break;
-        }
     }//GEN-LAST:event_datumBoxActionPerformed
 
     private void rechnungIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechnungIdActionPerformed
-        /*try {
-         
-            String query = "SELECT  k.Name FROM `kunde` k,abrechnung a WHERE k.ID=a.Kundeid AND a.ID=?";
+  model = (DefaultTableModel) info1.getModel();
+        try {
+            String query = "SELECT abrechnung.ID, ware.ID AS Warenid, rechnungxware.Menge,ware.vkPreise,abrechnung.gesamt FROM abrechnung,rechnungxware,ware "
+                    + "WHERE abrechnung.ID=? AND rechnungxware.abID = abrechnung.ID AND rechnungxware.wareID = ware.ID";
             ps = Utils.getConnection().prepareStatement(query);
-            ps.setObject(1,rechnungId.getSelectedItem());
-            
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                String name = rs.getString("Name");
-                kundeName.setText(name);
-            }
+            ps.setString(1,(String)rechnungId.getSelectedItem());
+          //  rs = ps.executeQuery();
+            //while (rs.next()) {
+             //   model.addRow(new Object[]{rs.getString("ware.ID"),rs.getString("rechnungxware.Menge"), rs.getString("ware.vkPreise")});
+           // }
         } catch (SQLException ex) {
-            Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+            Logger.getLogger(Rechnung.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_rechnungIdActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ZurückActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZurückActionPerformed
         Mobil.cl.show(Mobil.cardPanel, "Liste");
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- try {
-            String query = "SELECT abrechnung.ID, abrechnung.datum, abrechnung.gesamt FROM abrechnung,kunde WHERE kunde.ID=abrechnung.Kundeid AND kunde.Name =?";
-        
-            ps = Utils.getConnection().prepareStatement(query);
-            ps.setString(1,"مهند");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString("abrechnung.gesamt"));
-                System.out.println(suchA.getText());
-              
-                    model.addRow(new Object[]{ rs.getString("abrechnung.gesamt"), rs.getString("abrechnung.datum"), rs.getString("abrechnung.ID")});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
-        }    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void suchAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suchAKeyTyped
-        model = (DefaultTableModel) info.getModel();
-        rowCount = model.getRowCount();
-        //Löcht alle zeile von unsere Tabelle
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
-        try {
-            String query = "SELECT abrechnung.ID, abrechnung.datum, abrechnung.gesamt FROM abrechnung,kunde WHERE kunde.ID=abrechnung.Kundeid AND kunde.Name=?";
-
-            ps = Utils.getConnection().prepareStatement(query);
-            ps.setString(1, suchA.getText()+ "%");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-
-                model.addRow(new Object[]{ rs.getInt("abrechnung.gesamt"), rs.getString("abrechnung.datum"), rs.getString("abrechnung.ID")});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_suchAKeyTyped
+    }//GEN-LAST:event_ZurückActionPerformed
     public static void rechnungListe() {
         rechnungId.removeAllItems();
         try {
@@ -314,19 +198,12 @@ public class Rechnung extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Zurück;
     private javax.swing.JComboBox<String> datumBox;
-    private javax.swing.JTable info;
     private javax.swing.JTable info1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel kundeName;
     private static javax.swing.JComboBox<String> rechnungId;
-    private javax.swing.JTextField suchA;
     // End of variables declaration//GEN-END:variables
 }

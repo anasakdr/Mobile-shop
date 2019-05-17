@@ -350,6 +350,8 @@ public class Sell extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        model = (DefaultTableModel) vkTabele.getModel();
+        if(model.getRowCount()>0)model.setRowCount(0);
         Mobil.cl.show(Mobil.cardPanel, "Liste");
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -565,6 +567,7 @@ public class Sell extends javax.swing.JPanel {
                 ps.setInt(2, wareId);
                 ps.setInt(3, Integer.parseInt(menge));
                 ps.executeUpdate();
+                
             } catch (SQLException ex) {
                 Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -573,8 +576,6 @@ public class Sell extends javax.swing.JPanel {
                 ps = Utils.getConnection().prepareStatement(query1);
                 ps.setInt(1, Integer.parseInt(menge));
                 ps.setInt(2, wareId);
-                System.out.println(menge);
-                System.out.println(wareId);
                 ps.executeUpdate();
                 Mobil.cl.show(Mobil.cardPanel, "Liste");
                 
