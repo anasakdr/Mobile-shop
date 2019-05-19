@@ -139,7 +139,7 @@ public class Rechnung extends javax.swing.JPanel {
         String currentTime = sdf.format(dt);
          String query = "";
          
-        rechnungId.removeAllItems();
+        //rechnungId.removeAllItems();
         switch (datumBox.getSelectedIndex()) {
             case 0:
                 query="SELECT abrechnung.ID FROM abrechnung WHERE abrechnung.datum=?";

@@ -132,7 +132,7 @@ public static void anzeigen() {
             model.removeRow(i);
         }
         try {
-            String query = "SELECT w.Name,k.kaufpreise,k.datum,k.quan,k.vkpreise FROM ware w, kaufware k WHERE w.ID=k.wareId AND w.Name LIKE ?";
+            String query = "SELECT w.Name,k.kaufpreise,k.datum,k.quan,w.vkpreise FROM ware w, kaufware k WHERE w.ID=k.wareId AND w.Name LIKE ?";
         
             ps = Utils.getConnection().prepareStatement(query);
             ps.setString(1, Mobil.ware3);

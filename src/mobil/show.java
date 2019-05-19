@@ -18,10 +18,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Anas
  */
 public class show extends javax.swing.JPanel {
-   static PreparedStatement ps;
+
+    static PreparedStatement ps;
     static ResultSet st;
     static DefaultTableModel model;
-        static    int rowCount;
+    static int rowCount;
+
     /**
      * Creates new form show
      */
@@ -171,69 +173,68 @@ public class show extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       Mobil.cl.show(Mobil.cardPanel, "Liste"); 
+        Mobil.cl.show(Mobil.cardPanel, "Liste");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel9MouseClicked
-        public static void showWare(){
-              model = (DefaultTableModel) wareTabele.getModel();
+    public static void showWare() {
+        model = (DefaultTableModel) wareTabele.getModel();
         rowCount = model.getRowCount();
         //Löcht alle zeile von unsere Tabelle
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        String ss="SELECT w.Name,k.kaufpreise,k.datum,k.quan,k.vkpreise FROM ware w, kaufware k WHERE w.ID=k.wareId  ";
+        String ss = "SELECT w.Name,k.kaufpreise,k.datum,k.quan,w.vkpreise FROM ware w, kaufware k WHERE w.ID=k.wareId  ";
         try {
-            ps=Utils.getConnection().prepareStatement(ss);
-            st=ps.executeQuery();
-            while(st.next()){
-                 model.addRow(new Object[]{st.getString("datum"),st.getString("vkpreise"), st.getString("kaufpreise"), st.getString("quan"), st.getString("Name")});
+            ps = Utils.getConnection().prepareStatement(ss);
+            st = ps.executeQuery();
+            while (st.next()) {
+                model.addRow(new Object[]{st.getString("datum"), st.getString("vkpreise"), st.getString("kaufpreise"), st.getString("quan"), st.getString("Name")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+    }
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        int index =wareTabele.getSelectedRow();
-        model=(DefaultTableModel) wareTabele.getModel();
-        int v1=Integer.parseInt(model.getValueAt(index, 0).toString());
-        int v2=Integer.parseInt(model.getValueAt(index, 1).toString());
-        int v3=Integer.parseInt(model.getValueAt(index, 2).toString());
-        int v4=Integer.parseInt(model.getValueAt(index, 3).toString());
-            
+        int index = wareTabele.getSelectedRow();
+        model = (DefaultTableModel) wareTabele.getModel();
+        int v1 = Integer.parseInt(model.getValueAt(index, 0).toString());
+        int v2 = Integer.parseInt(model.getValueAt(index, 1).toString());
+        int v3 = Integer.parseInt(model.getValueAt(index, 2).toString());
+        int v4 = Integer.parseInt(model.getValueAt(index, 3).toString());
+
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        int selectedRow =wareTabele.getSelectedRow();
-     model=(DefaultTableModel) wareTabele.getModel();
-     String sss=model.getValueAt(selectedRow,3).toString();
+        int selectedRow = wareTabele.getSelectedRow();
+        model = (DefaultTableModel) wareTabele.getModel();
+        String sss = model.getValueAt(selectedRow, 3).toString();
         int ii = JOptionPane.showConfirmDialog(null, "Sind Sie sicher?", "Sicherheit Frage", JOptionPane.OK_CANCEL_OPTION);
         if (ii == JOptionPane.OK_OPTION) {
-           
-                try {
-                    ps = Utils.getConnection().prepareStatement("DELETE FROM ware WHERE Name=?");
-                    
-                    
-                    ps.setString(1, sss);
-                    ps.executeUpdate();
-                    showWare();
-                    JOptionPane.showMessageDialog(null, "لقد تم حذف المنتج");
-                 //   Show_Product_In_JTable();                                   
-                } catch (SQLException ex) {
-                    Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
-                    //Zeig mir Massege
-                    JOptionPane.showMessageDialog(null, "لم يتم حذف المنتج");
-                
-                 } 
-            }else if (ii == JOptionPane.CANCEL_OPTION) {
-                JOptionPane.showMessageDialog(null, "alles klar", "Sicherheit Frage", JOptionPane.ERROR_MESSAGE);
+
+            try {
+                ps = Utils.getConnection().prepareStatement("DELETE FROM ware WHERE Name=?");
+
+                ps.setString(1, sss);
+                ps.executeUpdate();
+                showWare();
+                JOptionPane.showMessageDialog(null, "لقد تم حذف المنتج");
+                //   Show_Product_In_JTable();                                   
+            } catch (SQLException ex) {
+                Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);
+                //Zeig mir Massege
+                JOptionPane.showMessageDialog(null, "لم يتم حذف المنتج");
+
             }
+        } else if (ii == JOptionPane.CANCEL_OPTION) {
+            JOptionPane.showMessageDialog(null, "alles klar", "Sicherheit Frage", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void suchNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_suchNameKeyTyped
-         model = (DefaultTableModel) wareTabele.getModel();
+        model = (DefaultTableModel) wareTabele.getModel();
         rowCount = model.getRowCount();
         //Löcht alle zeile von unsere Tabelle
         for (int i = rowCount - 1; i >= 0; i--) {
@@ -241,12 +242,12 @@ public class show extends javax.swing.JPanel {
         }
         try {
             String query = "SELECT w.Name,k.kaufpreise,k.datum,k.quan,k.vkpreise FROM ware w, kaufware k WHERE w.ID=k.wareId AND w.Name LIKE ?";
-        
+
             ps = Utils.getConnection().prepareStatement(query);
-            ps.setString(1, suchName.getText()+ "%");
+            ps.setString(1, suchName.getText() + "%");
             st = ps.executeQuery();
-            while (st.next()) {       
-                    model.addRow(new Object[]{st.getString("datum"),st.getString("vkpreise"), st.getString("kaufpreise"), st.getString("quan"), st.getString("Name")});
+            while (st.next()) {
+                model.addRow(new Object[]{st.getString("datum"), st.getString("vkpreise"), st.getString("kaufpreise"), st.getString("quan"), st.getString("Name")});
             }
         } catch (SQLException ex) {
             Logger.getLogger(show.class.getName()).log(Level.SEVERE, null, ex);

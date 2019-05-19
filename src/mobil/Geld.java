@@ -52,6 +52,10 @@ public class Geld extends javax.swing.JPanel {
         verkauf = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        vkGewin = new javax.swing.JLabel();
+        gewinn = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(24, 40, 108));
 
@@ -122,49 +126,82 @@ public class Geld extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(255, 51, 51));
         jLabel10.setText("ليرة سورية");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel7.setText("ربح المبيع");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel12.setText("الربح الصافي");
+
+        vkGewin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        vkGewin.setForeground(new java.awt.Color(51, 204, 255));
+        vkGewin.setText("vkGewin");
+
+        gewinn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        gewinn.setForeground(new java.awt.Color(51, 204, 255));
+        gewinn.setText("gewinn");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(294, 294, 294))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(vkGewin)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel8)
                             .addComponent(jLabel10))
-                        .addGap(27, 27, 27)
+                        .addGap(322, 322, 322)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addComponent(gewinn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel12)
+                        .addGap(178, 178, 178)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(eGeld)
-                                .addComponent(bGeld, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(vGeld)
-                            .addComponent(rGeld)
-                            .addComponent(verkauf))
-                        .addGap(46, 46, 46)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(159, 159, 159))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(199, 199, 199)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel9))
-                                .addGap(235, 235, 235))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 118, Short.MAX_VALUE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel9))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(vGeld)
+                                    .addComponent(eGeld))
+                                .addGap(47, 47, 47)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(15, 15, 15))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(verkauf, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rGeld, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(44, 44, 44)
+                                .addComponent(bGeld)))))
+                .addGap(159, 159, 159))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +222,9 @@ public class Geld extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(verkauf)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel7)
+                    .addComponent(vkGewin))
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -196,9 +235,17 @@ public class Geld extends javax.swing.JPanel {
                     .addComponent(jLabel9)
                     .addComponent(bGeld)
                     .addComponent(jLabel11))
-                .addGap(47, 47, 47)
-                .addComponent(jButton1)
-                .addGap(31, 31, 31))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton1)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(gewinn))
+                        .addGap(50, 50, 50))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -219,7 +266,7 @@ public static void ekZeigen(){
     
 }
 public static void vkZeigen(){
-    String query="SELECT SUM(vkpreise*quan)as s FROM `kaufware`";
+    String query="SELECT SUM(a.vkpreise*k.quan)as s FROM kaufware k,ware a WHERE k.wareId=a.ID";
         try {
             ps = Utils.getConnection().prepareStatement(query);
             rs=ps.executeQuery();
@@ -232,7 +279,7 @@ public static void vkZeigen(){
     
 }
 public static void verkaufZeigen(){
-    String query="SELECT SUM(vkpreise*Menge)as s FROM `rechnungxware`,kaufware WHERE kaufware.wareId=rechnungxware.wareID";
+    String query="SELECT SUM(w.vkpreise*Menge)as s FROM `rechnungxware`,ware w WHERE w.ID=rechnungxware.wareID";
         try {
             ps = Utils.getConnection().prepareStatement(query);
             rs=ps.executeQuery();
@@ -243,6 +290,18 @@ public static void verkaufZeigen(){
             Logger.getLogger(Geld.class.getName()).log(Level.SEVERE, null, ex);
         }
     
+}
+public static void verkaufGewinn(){
+    String query="SELECT SUM((w.vkpreise*r.Menge)-(k.kaufpreise*r.Menge))as s FROM rechnungxware r,ware w ,kaufware k WHERE w.ID=r.wareID AND r.wareID=k.wareId";
+        try {
+            ps=Utils.getConnection().prepareStatement(query);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                vkGewin.setText(rs.getString("s"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Geld.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }
 public static void rkZeigen(){
     String query="SELECT SUM(geld) as s FROM `rebaratur`";
@@ -270,24 +329,35 @@ public static void bkZeigen(){
         }
     
 }
+public static void gewinn(){
+double vkG=Double.parseDouble(vkGewin.getText());
+double reparaturG=Double.parseDouble(rGeld.getText());
+double bezahlG=Double.parseDouble(bGeld.getText());
+double summ=(vkG+reparaturG)-bezahlG;
+gewinn.setText(Double.toString(summ));
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JLabel bGeld;
     public static javax.swing.JLabel eGeld;
+    private static javax.swing.JLabel gewinn;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private static javax.swing.JLabel rGeld;
     private static javax.swing.JLabel vGeld;
     private static javax.swing.JLabel verkauf;
+    private static javax.swing.JLabel vkGewin;
     // End of variables declaration//GEN-END:variables
 }

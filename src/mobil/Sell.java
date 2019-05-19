@@ -353,6 +353,7 @@ public class Sell extends javax.swing.JPanel {
         model = (DefaultTableModel) vkTabele.getModel();
         if(model.getRowCount()>0)model.setRowCount(0);
         Mobil.cl.show(Mobil.cardPanel, "Liste");
+        summmm.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -428,7 +429,7 @@ public class Sell extends javax.swing.JPanel {
 
             model = (DefaultTableModel) vkTabele.getModel();
             rowCount = model.getRowCount();
-            String query = "SELECT kaufware.vkpreise FROM `kaufware`,ware WHERE kaufware.wareId=ware.ID AND kaufware.datum=(SELECT MAX(kaufware.datum) "
+            String query = "SELECT ware.vkpreise FROM `kaufware`,ware WHERE kaufware.wareId=ware.ID AND kaufware.datum=(SELECT MAX(kaufware.datum) "
                     + "FROM kaufware) AND ware.Name=?";
 
             try {

@@ -45,12 +45,12 @@ public class Product extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         nameFeld = new javax.swing.JTextField();
-        qFeld = new javax.swing.JTextField();
+        quanFeld = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         ekFeld = new javax.swing.JTextField();
         vkFeld = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Add = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -69,10 +69,10 @@ public class Product extends javax.swing.JPanel {
 
         nameFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        qFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        qFeld.addKeyListener(new java.awt.event.KeyAdapter() {
+        quanFeld.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        quanFeld.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                qFeldKeyTyped(evt);
+                quanFeldKeyTyped(evt);
             }
         });
 
@@ -98,12 +98,12 @@ public class Product extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("أضافة");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Add.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Add.setForeground(new java.awt.Color(255, 51, 51));
+        Add.setText("أضافة");
+        Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AddActionPerformed(evt);
             }
         });
 
@@ -158,14 +158,14 @@ public class Product extends javax.swing.JPanel {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1)))))
+                                    .addComponent(Add)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(datumL)
                         .addGap(48, 48, 48)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(qFeld, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -186,7 +186,7 @@ public class Product extends javax.swing.JPanel {
                     .addComponent(nameFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(qFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(quanFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(datumL))
@@ -200,7 +200,7 @@ public class Product extends javax.swing.JPanel {
                     .addComponent(vkFeld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addGap(24, 24, 24))
         );
@@ -214,15 +214,16 @@ public class Product extends javax.swing.JPanel {
         System.exit(0);
     }//GEN-LAST:event_jLabel9MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int vk = Integer.valueOf(vkFeld.getText());
-        int ek = Integer.valueOf(ekFeld.getText());
-        int wareID = 0;
-        String datum = "";
-        if (Utils.isEmpty(nameFeld.getText(), qFeld.getText(), ekFeld.getText(), vkFeld.getText())) {
+    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
+   
+        if (Utils.isEmpty(nameFeld.getText(), quanFeld.getText(), ekFeld.getText(), vkFeld.getText())) {
             JOptionPane.showMessageDialog(null, "بعض الجداول فارغة");
             return;
         } else {
+                 int vk = Integer.valueOf(vkFeld.getText());
+        int ek = Integer.valueOf(ekFeld.getText());
+        int wareID = 0;
+        String datum = "";
             try {
                 String ver = "SELECT * FROM ware WHERE Name =?";
                 ps = Utils.getConnection().prepareStatement(ver);
@@ -242,13 +243,12 @@ public class Product extends javax.swing.JPanel {
                 ps = Utils.getConnection().prepareStatement(ver1);
                 ps.setInt(1, wareID);
                 rs = ps.executeQuery();
-
                 while (rs.next()) {
                     datum = rs.getDate(1).toString();
                     if (datum.equals(currentTime)) {
                         JOptionPane.showMessageDialog(null, "هذه المادة تمت اضافتها اليوم مسبقا");
                         nameFeld.setText("");
-                        qFeld.setText("");
+                        quanFeld.setText("");
                         ekFeld.setText("");
                         vkFeld.setText("");
                         return;
@@ -257,22 +257,29 @@ public class Product extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            //اذا كانت المادة موجودة من قبل
             if (wareID != 0) {
-                String vers = "INSERT INTO kaufware( wareId,kaufpreise,datum,quan,vkpreise ) VALUES (?,?,?,?,?) ";
+                String vers = "INSERT INTO kaufware( wareId,kaufpreise,datum,quan) VALUES (?,?,?,?) ";
                 try {
                     ps = Utils.getConnection().prepareStatement(vers);
                     ps.setInt(1, wareID);
                     ps.setString(2, ekFeld.getText());
                     ps.setString(3, datumL.getText());
-                    ps.setString(4, qFeld.getText());
-                    ps.setString(5, ekFeld.getText());
+                    ps.setString(4, quanFeld.getText());
                     ps.executeUpdate();
                     nameFeld.setText("");
-                    qFeld.setText("");
+                    quanFeld.setText("");
                     ekFeld.setText("");
-                    vkFeld.setText("");
 
+                } catch (SQLException ex) {
+                    Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    String ss = "INSERT INTO ware( vkpreise ) VALUES (?)where ware.ID=?";
+                    ps = Utils.getConnection().prepareStatement(ss);
+                    ps.setString(1, vkFeld.getText());
+                    ps.setInt(2, wareID);
+                    vkFeld.setText("");
                 } catch (SQLException ex) {
                     Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -286,12 +293,14 @@ public class Product extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                //اذا كانت البضاعة جديدة
             } else {
                 try {
-                    String ss = "INSERT INTO ware( Name,quantit ) VALUES (?,?)";
+                    String ss = "INSERT INTO ware( Name,quantit,vkpreise ) VALUES (?,?,?)";
                     ps = Utils.getConnection().prepareStatement(ss);
                     ps.setString(1, nameFeld.getText());
-                    ps.setString(2, qFeld.getText());
+                    ps.setString(2, quanFeld.getText());
+                    ps.setString(3,vkFeld.getText());
                     if (ek > vk) {
                         JOptionPane.showMessageDialog(null, "سعر الشراء اكبر من سعر البيع");
                         return;
@@ -312,38 +321,35 @@ public class Product extends javax.swing.JPanel {
                     ex.printStackTrace();
                 }
                 try {
-                    String ss = "INSERT INTO kaufware( wareId,kaufpreise,datum,quan,vkpreise ) VALUES (?,?,?,?,?)";
+                    String ss = "INSERT INTO kaufware( wareId,kaufpreise,datum,quan ) VALUES (?,?,?,?)";
                     ps = Utils.getConnection().prepareStatement(ss);
                     ps.setInt(1, wareID);
                     ps.setString(2, ekFeld.getText());
                     ps.setString(3, datumL.getText());
-                    ps.setString(4, qFeld.getText());
-                    ps.setString(5, ekFeld.getText());
+                    ps.setString(4, quanFeld.getText());
                     if (ek > vk) {
                         JOptionPane.showMessageDialog(null, "سعر الشراء اكبر من سعر البيع");
                         return;
                     }
                     ps.executeUpdate();
                     nameFeld.setText("");
-                    qFeld.setText("");
+                    quanFeld.setText("");
                     ekFeld.setText("");
                     vkFeld.setText("");
-
                 } catch (SQLException ex) {
                     Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AddActionPerformed
 
-    private void qFeldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_qFeldKeyTyped
+    private void quanFeldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quanFeldKeyTyped
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
             getToolkit().beep();
             evt.consume();
         }
-    }//GEN-LAST:event_qFeldKeyTyped
+    }//GEN-LAST:event_quanFeldKeyTyped
 
     private void ekFeldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ekFeldKeyTyped
         char c = evt.getKeyChar();
@@ -362,9 +368,9 @@ public class Product extends javax.swing.JPanel {
     }//GEN-LAST:event_vkFeldKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Add;
     public static javax.swing.JLabel datumL;
     private javax.swing.JTextField ekFeld;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -373,7 +379,7 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nameFeld;
-    private javax.swing.JTextField qFeld;
+    private javax.swing.JTextField quanFeld;
     private javax.swing.JTextField vkFeld;
     // End of variables declaration//GEN-END:variables
 }
