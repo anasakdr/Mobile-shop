@@ -5,15 +5,25 @@
  */
 package mobil;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static mobil.ShowKunde.model;
@@ -333,8 +343,8 @@ public class Sell extends javax.swing.JPanel {
                             .addComponent(kundenBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(10, 10, 10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -436,7 +446,21 @@ public class Sell extends javax.swing.JPanel {
                 ps = Utils.getConnection().prepareStatement(query);
                 ps.setString(1, wareBox.getSelectedItem().toString());
                 rs = ps.executeQuery();
-
+              
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\ansak\\Desktop\\mobile\\Mobile-shop\\beep-07.wav"));
+            AudioFormat af     = audioInputStream.getFormat();
+            int size      = (int) (af.getFrameSize() * audioInputStream.getFrameLength());
+            byte[] audio       = new byte[size];
+            DataLine.Info info      = new DataLine.Info(Clip.class, af, size);
+            audioInputStream.read(audio, 0, size);
+            
+           // for(int i=0; i < 32; i++) {
+                Clip clip = (Clip) AudioSystem.getLine(info);
+                clip.open(af, audio, 0, size);
+                clip.start();
+           // }
+   
+                
                 while (rs.next()) {
                     double l = Double.parseDouble(rs.getString("vkpreise"));
                     summe = l * quan;
@@ -461,6 +485,12 @@ public class Sell extends javax.swing.JPanel {
                     quanFeld.setText("");
                 }
             } catch (SQLException ex) {
+                Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (LineUnavailableException ex) {
                 Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
             }
 

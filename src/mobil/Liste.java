@@ -8,6 +8,7 @@ package mobil;
 import java.text.DateFormat;
 import static java.time.Instant.now;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -336,7 +337,6 @@ public class Liste extends javax.swing.JPanel {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         Mobil.cl.show(Mobil.cardPanel, "Rebaratur");
         Rebaratur.datumL.setText(currentTime);
-
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -348,7 +348,6 @@ public class Liste extends javax.swing.JPanel {
         Geld.verkaufZeigen();
         Geld.verkaufGewinn();
         Geld.gewinn();
-
     }//GEN-LAST:event_jButton8ActionPerformed
 
 

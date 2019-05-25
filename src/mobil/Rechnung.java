@@ -230,18 +230,22 @@ public class Rechnung extends javax.swing.JPanel {
     private void listFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listFMouseClicked
         model = (DefaultTableModel) info1.getModel();
         model.setRowCount(0);
+        double gesamtStueck;
         try {
-            String query = "SELECT ware.Name,rechnungxware.Menge,ware.vkPreise,abrechnung.gesamt,kunde.Name FROM ware,rechnungxware,abrechnung,kunde\n" +
-"WHERE  abrechnung.Kundeid=kunde.ID\n" +
-"AND abrechnung.ID=? AND ware.ID=rechnungxware.wareID AND rechnungxware.abID=abrechnung.ID";
+            String query = "SELECT ware.Name,rechnungxware.Menge,ware.vkPreise,abrechnung.gesamt,kunde.Name FROM ware,rechnungxware,abrechnung,kunde\n"
+                    + "WHERE  abrechnung.Kundeid=kunde.ID\n"
+                    + "AND abrechnung.ID=? AND ware.ID=rechnungxware.wareID AND rechnungxware.abID=abrechnung.ID";
             ps = Utils.getConnection().prepareStatement(query);
             ps.setString(1, listF.getSelectedValue());
             rs = ps.executeQuery();
             while (rs.next()) {
-                model.addRow(new Object[]{ rs.getString("abrechnung.gesamt"), rs.getString("ware.vkPreise"), rs.getString("rechnungxware.Menge"), rs.getString("ware.Name")});
+                gesamtStueck = rs.getDouble("ware.vkPreise") * rs.getInt("rechnungxware.Menge");
+                model.addRow(new Object[]{gesamtStueck, rs.getString("ware.vkPreise"), rs.getString("rechnungxware.Menge"), rs.getString("ware.Name")});
                 gesamtL.setText(rs.getString("abrechnung.gesamt"));
                 nameL.setText(rs.getString("kunde.Name"));
+                ///////model.getValueAt(0, 2);1 1
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(Sell.class.getName()).log(Level.SEVERE, null, ex);
         }
